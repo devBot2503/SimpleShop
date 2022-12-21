@@ -1,0 +1,52 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', Geneva, Verdana, sans-serif;
+}
+
+header{
+    height: 30px;
+}
+
+nav{
+    background: fixed;
+    clear: both;
+    height: inherit;
+}
+
+input :focus{
+    border-color: pink;
+    text-indent: 5px;
+}
+
+.navigation{
+    height: inherit;
+}
+
+.search{
+    background-color: lightgrey;
+    border-style: none;
+    border-radius: 20px;
+    position: relative;
+    float: right;
+    margin-left: 20px;
+    height: 30px;
+    width: 300px;
+    text-indent: 5px;
+
+}
+
+.cart{
+    position: relative;
+    border-radius: 20px;
+    height: 30px;
+    border-style: none;
+    background-color: pink;
+    float: right;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.logo{
+    position: relative;
+    float: left;
+
+}
