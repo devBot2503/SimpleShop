@@ -2,6 +2,7 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', Geneva, Verdana, sans-serif;
 }
 
+
 header{
     height: 30px;
 }
@@ -15,6 +16,11 @@ nav{
 input :focus{
     border-color: pink;
     text-indent: 5px;
+}
+
+.viewManager{
+    display: flex;
+    display: -webkit-flex;
 }
 
 .navigation{
@@ -31,7 +37,6 @@ input :focus{
     height: 30px;
     width: 300px;
     text-indent: 5px;
-
 }
 
 .cart{
