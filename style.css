@@ -43,7 +43,8 @@ li{
 
 .search{
     background-color: lightgrey;
-    border-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
     border-style: hidden;
     position: relative;
     float: right;
@@ -58,13 +59,15 @@ li{
 
 .cart{
     position: relative;
-    border-radius: 20px;
+    width: 60px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
     height: 30px;
     border-style: none;
     background-color: pink;
     float: right;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 .logo{
