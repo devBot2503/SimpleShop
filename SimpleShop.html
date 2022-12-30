@@ -11,22 +11,41 @@
     <header>
         <nav>
             <ul class="navigation" id="nav">    <!--Navigationsleiste-->
-                <img class="logo" src="" alt="Simple Shop" onclick="setPageState('m|f')">
-                <button class="cart" src=""> Cart </button>
-                <input class="search" placeholder="search" ></input>
+                <div class="clickable">
+                    <img class="logo" src="" alt="Simple Shop" onclick="setPageState('m|f')">
+                </div>
+                <div class="clickable">
+                    <button class="cart" src=""> Cart </button>
+                </div>
+                <div class="inputHolder">
+                    <input class="search" placeholder="search" ></input>
+                </div>
             </ul>
         </nav>
     </header>
 
     <div class="viewManager" id="vM">
-        <div class="maleFemale" id="m|f"> <!--Startzustand siehe Schritt 1 von Paperprototype-->
-            <div class="male" id="m"><img src="./graphics/male.png" alt="Male" /></div>
-            <div class="female" id="f"><img src="./graphics/female.png" alt="Female" /></div>
+        <div class="maleFemale clickable" id="m|f"> <!--Startzustand siehe Schritt 1 von Paperprototype-->
+            <div class="male" id="m" onclick="maleOnClick()">
+                <img src="./graphics/male.png" alt="Male" />
+            </div>
+            <div class="female" id="f" onclick="femaleOnClick()">
+                <img src="./graphics/female.png" alt="Female" />
+            </div>
     
         </div>
     
         <div class="categories" id="categories"> <!--Ausklappbare Kategorien siehe Schitt 2-4 Paperprototype -->
             <p>categories_test_paragraph</p>
+            <li>
+                <img src="./graphics/female_head.png" alt="female_head" id="head">
+            </li>
+            <li>
+                <img src="./graphics/female_upper_body.png" alt="female_upper_body" id="upper_body">
+            </li>
+            <li>
+                <img src="./graphics/female_bottom.png" alt="female_bottom" id="bottom">
+            </li>
         </div>
     
         <div class="pruductView" id="prodView"> <!--Produktansicht siehe Paperprototype Schritt 5 und 8-->

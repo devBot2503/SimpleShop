@@ -29,3 +29,22 @@ function setPageState(targetId){
 
     showElement(targetId);
 }
+
+/*
+Alexander Kehr
+Es folgen ein paar onClick Funktionen welche selbsterklärend sind
+*/
+
+function maleOnClick(){
+    setPageState("categories");
+    document.getElementById("head").src = "./graphics/male_head.png";
+    document.getElementById("upper_body").src = "./graphics/male_upper_body.png";
+    document.getElementById("bottom").src = "./graphics/male_bottom.png";
+}
+
+function femaleOnClick(){
+    setPageState("categories");
+    document.getElementById("head").src = "./graphics/female_head.png";
+    document.getElementById("upper_body").src = "./graphics/female_upper_body.png";
+    document.getElementById("bottom").src = "./graphics/female_bottom.png";
+}
