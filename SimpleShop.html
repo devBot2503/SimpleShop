@@ -8,21 +8,18 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <ul class="navigation" id="nav">    <!--Navigationsleiste-->
-                <div class="clickable">
-                    <p class="logo" onclick="setPageState('m|f')">Simple Shop</p>
-                </div>
-                <div class="clickable">
-                    <button class="cart" src=""> Cart </button>
-                </div>
-                <div class="inputHolder">
-                    <input class="search" placeholder="search" ></input>
-                </div>
-            </ul>
-        </nav>
-    </header>
+    <ul class="navigation" id="nav">    <!--Navigationsleiste-->
+        <div class="clickable">
+            <p class="logo" onclick="setPageState('m|f')">Simple Shop</p>
+        </div>
+        <div class="clickable">
+            <button class="cart" src=""> Cart </button>
+        </div>
+        <div class="inputHolder">
+            <input class="search" placeholder="search" ></input>
+        </div>
+    </ul>
+
 
     <div class="viewManager" id="vM">
         <div class="maleFemale clickable" id="m|f"> <!--Startzustand siehe Schritt 1 von Paperprototype-->

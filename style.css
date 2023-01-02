@@ -6,17 +6,6 @@ body{
     background-color: #f1f1f1;
 }
 
-header{
-    height: 40px;
-    background-color: #777777;
-    border-radius: 20px;
-}
-
-nav{
-    background: fixed;
-    clear: both;
-    height: inherit;
-}
 
 input :focus{
     border-color: pink;
@@ -39,7 +28,11 @@ li{
 }
 
 .navigation{
-    height: inherit;
+    margin-top: 0;
+    padding-top: 0;
+    height: 40px;
+    background-color: #777777;
+    border-radius: 20px;
 }
 
 .search{
@@ -74,7 +67,7 @@ li{
 .logo{
     position: absolute;
     left: 40px;
-    top: -22px;
+    top: -30px;
     color: pink;
     height: 40px;
     width: auto;
