@@ -48,3 +48,10 @@ function femaleOnClick(){
     document.getElementById("upper_body").src = "./graphics/female_upper_body.png";
     document.getElementById("bottom").src = "./graphics/female_bottom.png";
 }
+
+function upperBodyOnClick(){
+    showElement("coats");
+    showElement("sweater");
+    showElement("tshirts");
+    showElement("gloves");
+}
