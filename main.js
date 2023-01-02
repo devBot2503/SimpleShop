@@ -33,6 +33,9 @@ function setPageState(targetId){
     hideElement("hats");
     hideElement("glasses");
     hideElement("earrings");
+    hideElement("trousers");
+    hideElement("shorts");
+    hideElement("shoes");
     showElement(targetId);
 }
 
@@ -60,10 +63,39 @@ function upperBodyOnClick(){
     showElement("sweater");
     showElement("tshirts");
     showElement("gloves");
+
+    hideElement("hats");
+    hideElement("glasses");
+    hideElement("earrings");
+    hideElement("trousers");
+    hideElement("shorts");
+    hideElement("shoes");
 }
 
 function headOnClick(){
     showElement("hats");
     showElement("glasses");
     showElement("earrings");
+
+    hideElement("coats");
+    hideElement("sweater");
+    hideElement("tshirts");
+    hideElement("gloves");
+    hideElement("trousers");
+    hideElement("shorts");
+    hideElement("shoes");
+}
+
+function bottomOnClick(){
+    showElement("trousers");
+    showElement("shorts");
+    showElement("shoes");
+
+    hideElement("coats");
+    hideElement("sweater");
+    hideElement("tshirts");
+    hideElement("gloves");
+    hideElement("hats");
+    hideElement("glasses");
+    hideElement("earrings");
 }
