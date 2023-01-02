@@ -30,6 +30,9 @@ function setPageState(targetId){
     hideElement("sweater");
     hideElement("tshirts");
     hideElement("gloves");
+    hideElement("hats");
+    hideElement("glasses");
+    hideElement("earrings");
     showElement(targetId);
 }
 
@@ -57,4 +60,10 @@ function upperBodyOnClick(){
     showElement("sweater");
     showElement("tshirts");
     showElement("gloves");
+}
+
+function headOnClick(){
+    showElement("hats");
+    showElement("glasses");
+    showElement("earrings");
 }
