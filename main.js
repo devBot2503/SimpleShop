@@ -26,7 +26,10 @@ function setPageState(targetId){
     hideElement("prodView");
     hideElement("checkout");
     hideElement("m|f");
-
+    hideElement("coats");
+    hideElement("sweater");
+    hideElement("tshirts");
+    hideElement("gloves");
     showElement(targetId);
 }
 
