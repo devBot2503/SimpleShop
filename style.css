@@ -153,3 +153,7 @@ li img{
     margin-left: 50%;
     display: none;
 }
+
+.cartView{
+    display: none;
+}
