@@ -7,6 +7,8 @@
     <script src="main.js"></script>
 </head>
 
+
+</style>
 <body>
     <ul class="navigation" id="nav">    <!--Navigationsleiste-->
         <div class="clickable">
@@ -79,13 +81,34 @@
         </div>
 
         <div class="cartView" id="cartView"> <!--Warenkorbansicht-->
-            <p>cartView_test_paragraph</p>
-            <li>
-                <p>produkt1</p>
-            </li>
-            <li>
-                <p>produkt2</p>
-            </li>
+            <table id="waren" >
+                <caption>Warenkorb</caption>
+                <thead>
+                    <th scope="col"> </th>
+                    <th scope="col">Produkt</th>
+                    <th scope="col">Anzahl</th>
+                    <th scope="col">Preis</th>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                      <td colspan="4">Summe Warenkorb:</td>
+                      <td>49 €</td>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <td> <img src="graphics/gloves/gloves_2.png" alt="glove_0" width="15%" align="left"></td>
+
+                    <td>Handschuhe gelb
+                    </td>
+                    <td>1</td>
+                      <td>49 €</td>
+                  </tbody>
+
+
+
+            </table>
+           
         </div>
     
         <div class="checkout" id="checkout"> <!--Checkout siehe Schritt 9 Paperprototype-->
