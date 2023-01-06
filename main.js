@@ -113,3 +113,7 @@ function setProdElements(target_name){
         document.getElementById(price_id).innerHTML = price;
     }
 }
+
+function prodOnClick(){
+    //TODO erstelle die onclick function, welche zur Anzelansicht der Produkte führt 
+}
