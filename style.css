@@ -175,7 +175,16 @@ td, th{
 
 table {
     border-collapse: collapse;
-  }     
+}     
+
 tr{
     border-bottom: 1px solid darkslategray;
+}
+
+caption{
+    color: rgb(226, 162, 173);
+    height: 40px;
+    width: auto;
+    font-style: italic;
+    font-size: 30px;
 }
