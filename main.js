@@ -93,6 +93,10 @@ function cartOnClick(){
 }
 
 function setProdElements(target_name){
+    if(target_name == ""){
+        alert("Out of stock, sorry :(");
+        return;
+    }
     showElement("prodList");
     const prodPerPage = 8;
     const imgPath = "./graphics/" + target_name + "/" + target_name + "_";
