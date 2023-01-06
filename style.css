@@ -188,3 +188,8 @@ caption{
     font-style: italic;
     font-size: 30px;
 }
+
+.prodList{
+    float: left;
+    display: none;
+}

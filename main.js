@@ -36,6 +36,7 @@ function setPageState(targetId){
     hideElement("trousers");
     hideElement("shorts");
     hideElement("shoes");
+    hideElement("prodList");
     if(targetId == ""){
         return
     }
@@ -106,4 +107,8 @@ function bottomOnClick(){
 function cartOnClick(){
     setPageState("");
     showElement("cartView");
+}
+
+function underCategorieOnClick(){
+    console.log(targetId);
 }
