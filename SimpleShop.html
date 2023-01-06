@@ -81,34 +81,30 @@
         </div>
 
         <div class="cartView" id="cartView"> <!--Warenkorbansicht-->
-            <table id="waren" >
+            <table id="waren">
                 <caption>Warenkorb</caption>
                 <thead>
-                    <th scope="col"> </th>
-                    <th scope="col">Produkt</th>
-                    <th scope="col">Anzahl</th>
-                    <th scope="col">Preis</th>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                    
                 </thead>
 
                 <tbody>
-                    <td> <img src="graphics/gloves/gloves_2.png" alt="glove_0" width="15%" align="left"></td>
-
-                    <td>
-                        <p>Produkt_Name</p>
-                    </td>
-                    <td>1</td>
-                      <td>49 €</td>
-                  </tbody>
-
-                <tfoot>
                     <tr>
-                      <td colspan="4">Summe Warenkorb:</td>
-                      <td>49 €</td>
+                        <td class="cartProdImg"> 
+                            <img src="graphics/gloves/gloves_2.png" alt="glove_0">
+                        </td>
+                        <td>Yellow Gloves</td>
+                        <td>1</td>
+                        <td>49,00€</td>
                     </tr>
-                  </tfoot>
-
+                  </tbody>
             </table>
-           
+            <p class="total" id="total">Total: 49,00€</p>
         </div>
     
         <div class="checkout" id="checkout"> <!--Checkout siehe Schritt 9 Paperprototype-->

@@ -157,3 +157,25 @@ li img{
 .cartView{
     display: none;
 }
+
+
+.cartProdImg img{
+    width: 20%;
+    height: 20%;
+}
+
+.total{
+    float: right;
+}
+
+td, th{
+    text-align: center;
+    width: 20%;
+}
+
+table {
+    border-collapse: collapse;
+  }     
+tr{
+    border-bottom: 1px solid darkslategray;
+}
