@@ -33,6 +33,7 @@ function setPageState(targetId){
     hideElement("hats");
     hideElement("glasses");
     hideElement("earrings");
+    hideElement("scarfs");
     hideElement("trousers");
     hideElement("shorts");
     hideElement("shoes");
@@ -63,45 +64,26 @@ function femaleOnClick(){
 }
 
 function upperBodyOnClick(){
+    setPageState("categories");
     showElement("coats");
     showElement("sweater");
     showElement("tshirts");
     showElement("gloves");
-
-    hideElement("hats");
-    hideElement("glasses");
-    hideElement("earrings");
-    hideElement("trousers");
-    hideElement("shorts");
-    hideElement("shoes");
 }
 
 function headOnClick(){
+    setPageState("categories");
     showElement("hats");
     showElement("glasses");
     showElement("earrings");
-
-    hideElement("coats");
-    hideElement("sweater");
-    hideElement("tshirts");
-    hideElement("gloves");
-    hideElement("trousers");
-    hideElement("shorts");
-    hideElement("shoes");
+    showElement("scarfs");
 }
 
 function bottomOnClick(){
+    setPageState("categories");
     showElement("trousers");
     showElement("shorts");
     showElement("shoes");
-
-    hideElement("coats");
-    hideElement("sweater");
-    hideElement("tshirts");
-    hideElement("gloves");
-    hideElement("hats");
-    hideElement("glasses");
-    hideElement("earrings");
 }
 
 function cartOnClick(){
@@ -109,6 +91,3 @@ function cartOnClick(){
     showElement("cartView");
 }
 
-function underCategorieOnClick(){
-    console.log(targetId);
-}
