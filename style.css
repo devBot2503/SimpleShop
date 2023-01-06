@@ -190,6 +190,13 @@ caption{
 }
 
 .prodList{
-    float: left;
+    position: absolute;
+    right: 0;
+    top: 55px;
     display: none;
+    width: 85%;
+}
+
+.prodList table{
+    width: 100%;
 }

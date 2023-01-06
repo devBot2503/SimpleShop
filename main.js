@@ -24,6 +24,7 @@ Die Funktion setzt den Page state, also die Ansicht innerhalb des viewManagers.
 function setPageState(targetId){ 
     hideElement("categories");
     hideElement("prodView");
+    hideElement("cartView");
     hideElement("checkout");
     hideElement("m|f");
     hideElement("coats");
@@ -91,3 +92,6 @@ function cartOnClick(){
     showElement("cartView");
 }
 
+function setProdElements(target_name){
+    showElement("prodList");
+}
