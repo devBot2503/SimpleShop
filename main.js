@@ -94,4 +94,12 @@ function cartOnClick(){
 
 function setProdElements(target_name){
     showElement("prodList");
+    const prodPerPage = 8;
+    const imgPath = "./graphics/" + target_name + "/" + target_name + "_";
+    console.log(imgPath);
+    for(let i = 1; i <= prodPerPage; i++){ /* wir starten bei 1 weil das 0te img das generische categorien bild ist*/
+        let img_id = "prod_" + i;
+        console.log(img_id);
+        document.getElementById(img_id).src = imgPath + i + ".png";
+    }
 }

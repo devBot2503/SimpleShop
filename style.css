@@ -192,11 +192,18 @@ caption{
 .prodList{
     position: absolute;
     right: 0;
-    top: 55px;
+    top: 25%;
     display: none;
     width: 85%;
 }
 
 .prodList table{
     width: 100%;
+}
+
+td img{
+    width: 200px;
+    height: 200px;
+    max-width: 100%;
+    max-height: 100%;
 }

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
     <html lang="en">
     <meta charset="UTF-8">
@@ -9,8 +10,9 @@
 
 
 </style>
+
 <body>
-    <ul class="navigation" id="nav">    <!--Navigationsleiste-->
+    <ul class="navigation" id="nav"> <!--Navigationsleiste-->
         <div class="clickable">
             <p class="logo" onclick="setPageState('m|f')">Simple Shop</p>
         </div>
@@ -18,7 +20,7 @@
             <button class="cart" src="" onclick="cartOnClick()"> Cart </button>
         </div>
         <div class="inputHolder">
-            <input class="search" placeholder="search" ></input>
+            <input class="search" placeholder="search"></input>
         </div>
     </ul>
 
@@ -31,81 +33,107 @@
             <div class="female" id="f" onclick="femaleOnClick()">
                 <img src="./graphics/female.png" alt="Female" />
             </div>
-    
+
         </div>
 
         <div>
             <div class="categories" id="categories"> <!--Ausklappbare Kategorien siehe Schitt 2-4 Paperprototype -->
                 <li>
-                    <img class="headAdjustments" src="./graphics/female_head.png" alt="female_head" id="head" onclick="headOnClick()">
-                    <li class="underCategorie" id="hats">
-                        <img src="./graphics/hats/hat_0.png" alt="hat_0">
-                    </li>
-                    <li class="underCategorie" id="glasses">
-                        <img src="./graphics/glasses/glasses_0.png" alt="glasses_0">
-                    </li>
-                    <li class="underCategorie" id="earrings">
-                        <img src="./graphics/earrings/earring_0.png" alt="earring_0">
-                    </li>
-                    <li class="underCategorie" id="scarfs" onclick="setProdElements('scarfs')">
-                        <img src="./graphics/scarfs/scarf_0.png" alt="scarf_0">
-                    </li>
+                    <img class="headAdjustments" src="./graphics/female_head.png" alt="female_head" id="head"
+                        onclick="headOnClick()">
+                <li class="underCategorie" id="hats">
+                    <img src="./graphics/hats/hat_0.png" alt="hat_0">
+                </li>
+                <li class="underCategorie" id="glasses">
+                    <img src="./graphics/glasses/glasses_0.png" alt="glasses_0">
+                </li>
+                <li class="underCategorie" id="earrings">
+                    <img src="./graphics/earring/earring_0.png" alt="earring_0">
+                </li>
+                <li class="underCategorie" id="scarfs" onclick="setProdElements('scarf')">
+                    <img src="./graphics/scarf/scarf_0.png" alt="scarf_0">
+                </li>
                 </li>
                 <li>
-                    <img src="./graphics/female_upper_body.png" alt="female_upper_body" id="upper_body" onclick="upperBodyOnClick()">
-                    <li class="underCategorie" id="coats">
-                        <img src="./graphics/coats/coat_0.png" alt="coat_0">
-                    </li>
-                    <li class="underCategorie" id="sweater">
-                        <img src="./graphics/sweater/sweater_0.png" alt="sweater_0">
-                    </li>
-                    <li class="underCategorie" id="tshirts">
-                        <img src="./graphics/tshirts/tshirt_0.png" alt="tshirt_0">
-                    </li>
-                    <li class="underCategorie" id="gloves">
-                        <img src="./graphics/gloves/gloves_0.png" alt="glove_0">
-                    </li>
+                    <img src="./graphics/female_upper_body.png" alt="female_upper_body" id="upper_body"
+                        onclick="upperBodyOnClick()">
+                <li class="underCategorie" id="coats">
+                    <img src="./graphics/coats/coat_0.png" alt="coat_0">
+                </li>
+                <li class="underCategorie" id="sweater">
+                    <img src="./graphics/sweater/sweater_0.png" alt="sweater_0">
+                </li>
+                <li class="underCategorie" id="tshirts">
+                    <img src="./graphics/tshirt/tshirt_0.png" alt="tshirt_0">
+                </li>
+                <li class="underCategorie" id="gloves">
+                    <img src="./graphics/gloves/gloves_0.png" alt="glove_0">
+                </li>
                 </li>
                 <li>
                     <img src="./graphics/female_bottom.png" alt="female_bottom" id="bottom" onclick="bottomOnClick()">
-                    <li class="underCategorie" id="trousers">
-                        <img src="./graphics/trousers/trousers_0.png" alt="trousers_0">
-                    </li>
-                    <li class="underCategorie" id="shorts">
-                        <img src="./graphics/shorts/shorts_0.png" alt="shorts_0">
-                    </li>
-                    <li class="underCategorie" id="shoes">
-                        <img src="./graphics/shoes/shoe_0.png" alt="shoe_0">
-                    </li>
+                <li class="underCategorie" id="trousers">
+                    <img src="./graphics/trousers/trousers_0.png" alt="trousers_0">
+                </li>
+                <li class="underCategorie" id="shorts">
+                    <img src="./graphics/shorts/shorts_0.png" alt="shorts_0">
+                </li>
+                <li class="underCategorie" id="shoes">
+                    <img src="./graphics/shoes/shoes_0.png" alt="shoes_0">
+                </li>
                 </li>
             </div>
             <div class="prodList" id="prodList">
                 <table>
                     <tr>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                        <th>4</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     <tbody>
                         <tr>
-                            <td>prod_1</td>
-                            <td>prod_2</td>
-                            <td>prod_3</td>
-                            <td>prod_4</td>
+                            <td>
+                                <img id="prod_1" src="" alt="prod_1">
+                                <p id="price_1">12,99€</p>
+                            </td>
+                            <td>
+                                <img id="prod_2" src="" alt="prod_2">
+                                <p id="price_2">12,99€</p>
+                            </td>
+                            <td>
+                                <img id="prod_3" src="" alt="prod_3">
+                                <p id="price_3">12,99€</p>
+                            </td>
+                            <td>
+                                <img id="prod_4" src="" alt="prod_4">
+                                <p id="price_4">12,99€</p>
+                            </td>
                         </tr>
                         <tr>
-                            <td>prod_5</td>
-                            <td>prod_6</td>
-                            <td>prod_7</td>
-                            <td>prod_8</td>
+                            <td>
+                                <img id="prod_5" src="" alt="prod_5">
+                                <p id="price_5">12,99€</p>
+                            </td>
+                            <td>
+                                <img id="prod_6" src="" alt="prod_6">
+                                <p id="price_6">12,99€</p>
+                            </td>
+                            <td>
+                                <img id="prod_7" src="" alt="prod_7">
+                                <p id="price_7">12,99€</p>
+                            </td>
+                            <td>
+                                <img id="prod_8" src="" alt="prod_8">
+                                <p id="price_8">12,99€</p>
+                            </td>
                         </tr>
-                        
+
                     </tbody>
                 </table>
             </div>
         </div>
-    
+
         <div class="pruductView" id="prodView"> <!--Produktansicht siehe Paperprototype Schritt 5 und 8-->
             <p>pruductView_test_paragraph</p>
         </div>
@@ -120,12 +148,12 @@
                         <th scope="col">Quantity</th>
                         <th scope="col">Price</th>
                     </tr>
-                    
+
                 </thead>
 
                 <tbody>
                     <tr>
-                        <td class="cartProdImg"> 
+                        <td class="cartProdImg">
                             <img src="graphics/gloves/gloves_2.png" alt="glove_0">
                         </td>
                         <td>Yellow Gloves</td>
@@ -136,12 +164,13 @@
             </table>
             <p class="total" id="total">Total: 49,00€</p>
         </div>
-    
+
         <div class="checkout" id="checkout"> <!--Checkout siehe Schritt 9 Paperprototype-->
             <p>checkout_test_paragraph</p>
         </div>
-        
+
     </div>
 
 </body>
+
 </html>
