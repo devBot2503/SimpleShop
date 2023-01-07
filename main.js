@@ -16,29 +16,28 @@ function showElement(targetId){
     document.getElementById(targetId).style.display = "block";
 }
 
+let cart = [];
+let total = 0.00;
+const gloveProducts = [{name: "glove_1", price: 19.99}, {name: "glove_2", price: 19.99}, {name: "glove_3", price: 13.99}, {name: "glove_4", price: 19.99}, {name: "glove_5", price: 19.99}, {name: "glove_6", price: 22.99}, {name: "glove_7", price: 19.99}, {name: "glove_8", price: 19.99}];
+
+const scarfProducts = [{name: "scarf_1", price: 42.00}, {name: "scarf_2", price: 42.00}, {name: "scarf_3", price: 42.00}, {name: "scarf_4", price: 42.00}, {name: "scarf_5", price: 42.00}, {name: "scarf_6", price: 42.00}, {name: "scarf_7", price: 42.00}, {name: "scarf_8", price: 42.00}];
+
+const categoryProducts = [
+    {category: "gloves", products: gloveProducts},
+    {category: "scarf", products: scarfProducts}
+];
+
 /*
 Alexander Kehr
 Die Funktion setzt den Page state, also die Ansicht innerhalb des viewManagers.
 @parameter = targetId
 */
-function setPageState(targetId){ 
-    hideElement("categories");
-    hideElement("prodView");
-    hideElement("cartView");
-    hideElement("checkout");
-    hideElement("m|f");
-    hideElement("coats");
-    hideElement("sweater");
-    hideElement("tshirts");
-    hideElement("gloves");
-    hideElement("hats");
-    hideElement("glasses");
-    hideElement("earrings");
-    hideElement("scarfs");
-    hideElement("trousers");
-    hideElement("shorts");
-    hideElement("shoes");
-    hideElement("prodList");
+function setPageState(targetId){
+    const hiddenElements = ["categories", "prodView", "cartView", "checkout", "m|f", "coats", "sweater", "tshirts", "gloves", "hats", "glasses", "earrings", "scarfs", "trousers", "shorts", "shoes", "prodList"];
+    hiddenElements.forEach(e => {
+        hideElement(e);
+    })
+    
     if(targetId == ""){
         return
     }
@@ -99,21 +98,31 @@ function setProdElements(target_name){
     }
     showElement("prodList");
     const prodPerPage = 8;
+    const prodPerRow = 4;
     const imgPath = "./graphics/" + target_name + "/" + target_name + "_";
+    let products = categoryProducts.find(e => e.category == target_name).products;
+    let table = "<table>\n  <tr>\n";
     for(let i = 1; i <= prodPerPage; i++){ /* wir starten bei 1 weil das 0te img das generische categorien bild ist*/
         let img_id = "prod_" + i;
-        document.getElementById(img_id).src = imgPath + i + ".png";
         let price_id = "price_" + i;
-        let price = "";
-        if(target_name == "gloves"){
-            price = "19,99€";
-        }else if(target_name == "scarf"){
-            price = "42,00€"
+        table += "    <td>\n";
+        table += "      <img id=\"" + img_id + "\" src=\"" + imgPath + i + ".png\" onclick=\"prodOnClick()\"/>\n";
+        table += "      <p id=\"" + price_id + "\">" + products[i-1].price + "€</p>\n";
+        if(i % prodPerRow == 0){
+            table += "  </tr>\n";
+            if(i != prodPerPage){
+                table += "  <tr>\n";
+            }
         }
-        document.getElementById(price_id).innerHTML = price;
     }
+    table += "</table>\n";
+    document.getElementById("prodList").innerHTML = table;
+}
+
+function addToCartOnClick(){
+    //TODO erstelle die onclick function, welche ein Produkt dem Warenkorb hinzufügt
 }
 
 function prodOnClick(){
-    //TODO erstelle die onclick function, welche zur Anzelansicht der Produkte führt 
+    //TODO erstelle die onclick function, welche zur Einzelansicht der Produkte führt 
 }
