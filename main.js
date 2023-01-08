@@ -86,7 +86,30 @@ function bottomOnClick(){
     showElement("shorts");
     showElement("shoes");
 }
+function removeFromCart(item) {
+    // Get the cart from local storage
+    let cart = JSON.parse(localStorage.getItem("cart"));
 
+    // Find the index of the item in the cart
+    let index = -1;
+    for (let i = 0; i < cart.length; i++) {
+        if (cart[i].item == item) {
+            index = i;
+            break;
+        }
+    }
+
+    // If the item was found in the cart, remove it
+    if (index != -1) {
+        cart.splice(index, 1);
+    }
+
+    // Save the updated cart to local storage
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // Reload the cart view
+    cartOnClick();
+}
 function cartOnClick() {
 // Load the cart view
     setPageState("");
@@ -127,11 +150,23 @@ function cartOnClick() {
         let priceCell = document.createElement("td");
         priceCell.textContent = (quantity * price).toFixed(2) + '€';
 
+        // Create a remove button cell
+        let removeButtonCell = document.createElement("td");
+
+// Create the remove button
+        let removeButton = document.createElement("button");
+        removeButton.innerHTML = "X";
+        removeButton.setAttribute("onclick", "removeFromCart('"+cart[i].item+"')");
+
+// Add the button to the cell
+        removeButtonCell.appendChild(removeButton);
+
 // Add the cells to the table row
         tableRow.appendChild(prodImgCell);
         tableRow.appendChild(prodNameCell);
         tableRow.appendChild(quantityCell);
         tableRow.appendChild(priceCell);
+        tableRow.appendChild(removeButtonCell);
 // Add the table row to the table body
         tableBody.appendChild(tableRow);
 // Update the total price
