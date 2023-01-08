@@ -183,6 +183,44 @@ function changeProdViewAmount(amount) {
     if (newVal < 1) return;
     inputField.value = newVal;
 }
+function paypalSim() {
+    localStorage.clear();
+
+    document.getElementById("checkout").innerHTML = "";
+    setPageState("checkout");
+    // Get checkout div element
+    var checkoutDiv = document.querySelector(".checkout");
+
+    // Display spinning wheel
+    var spinningWheel = document.createElement("div");
+    spinningWheel.classList.add("spinning-wheel");
+    spinningWheel.style.display = "flex";
+    spinningWheel.style.justifyContent = "center";
+    checkoutDiv.appendChild(spinningWheel);
+
+    // Display title
+    var title = document.createElement("h1");
+    title.textContent = "Weiterleitung zur Zahlung";
+    title.style.textAlign = "center";
+    checkoutDiv.appendChild(title);
+
+    // Wait for 2 seconds
+    setTimeout(function() {
+        // Remove spinning wheel and title
+        checkoutDiv.removeChild(spinningWheel);
+        checkoutDiv.removeChild(title);
+
+        // Display "Vielen Dank für ihre Bestellung!" message
+        var message = document.createElement("h1");
+        message.textContent = "Vielen Dank für ihre Bestellung! (Bestellnummer: 123456789)";
+        message.style.textAlign = "center";
+        checkoutDiv.appendChild(message);
+    }, 2000);
+
+
+}
+
+
 
 function setProdElements(target_name){
     if(target_name == ""){
