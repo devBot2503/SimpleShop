@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<head>
+<head xmlns="http://www.w3.org/1999/html">
     <html lang="en">
     <meta charset="UTF-8">
     <title>SimpleShop</title>
@@ -17,7 +17,7 @@
             <p class="logo" onclick="setPageState('m|f')">Simple Shop</p>
         </div>
         <div class="clickable">
-            <button class="cart" src="" onclick="cartOnClick()"> Cart </button>
+            <button class="cart" src="" onclick="cartOnClick()"> <img style="width: 50%; height: auto;" src="graphics/cart.png" alt="cart"> </button>
         </div>
         <div class="inputHolder">
             <input class="search" placeholder="search"></input>
@@ -92,37 +92,37 @@
                     <tbody>
                         <tr>
                             <td>
-                                <img id="prod_1" src="" alt="prod_1" onclick="prodOnClick()">
+                                <img id="prod_1" src="" alt="prod_1" onclick="prodOnClick(this)">
                                 <p id="price_1">12,99€</p>
                             </td>
                             <td>
-                                <img id="prod_2" src="" alt="prod_2" onclick="prodOnClick()">
+                                <img id="prod_2" src="" alt="prod_2" onclick="prodOnClick(this)">
                                 <p id="price_2">12,99€</p>
                             </td>
                             <td>
-                                <img id="prod_3" src="" alt="prod_3" onclick="prodOnClick()">
+                                <img id="prod_3" src="" alt="prod_3" onclick="prodOnClick(this)">
                                 <p id="price_3">12,99€</p>
                             </td>
                             <td>
-                                <img id="prod_4" src="" alt="prod_4" onclick="prodOnClick()">
+                                <img id="prod_4" src="" alt="prod_4" onclick="prodOnClick(this)">
                                 <p id="price_4">12,99€</p>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <img id="prod_5" src="" alt="prod_5" onclick="prodOnClick()">
+                                <img id="prod_5" src="" alt="prod_5" onclick="prodOnClick(this)">
                                 <p id="price_5">12,99€</p>
                             </td>
                             <td>
-                                <img id="prod_6" src="" alt="prod_6" onclick="prodOnClick()">
+                                <img id="prod_6" src="" alt="prod_6" onclick="prodOnClick(this)">
                                 <p id="price_6">12,99€</p>
                             </td>
                             <td>
-                                <img id="prod_7" src="" alt="prod_7" onclick="prodOnClick()">
+                                <img id="prod_7" src="" alt="prod_7" onclick="prodOnClick(this)">
                                 <p id="price_7">12,99€</p>
                             </td>
                             <td>
-                                <img id="prod_8" src="" alt="prod_8" onclick="prodOnClick()">
+                                <img id="prod_8" src="" alt="prod_8" onclick="prodOnClick(this)">
                                 <p id="price_8">12,99€</p>
                             </td>
                         </tr>
@@ -134,8 +134,43 @@
 
 <!--bis hier ist die Struktur fertig-->
 
-        <div class="pruductView" id="prodView"> <!--Produktansicht siehe Paperprototype Schritt 5 und 8-->
-            <p>pruductView_test_paragraph</p>
+        <div class="productView" id="prodView"> <!--Produktansicht siehe Paperprototype Schritt 5 und 8-->
+
+            <table class="prodViewTable" style="border: 4px solid black;">
+                <button id="top-left-back" onclick="back()">🠔</button></button>
+                <tbody>
+                <tr>
+                    <td class="prodViewImg">
+                        <img src="graphics/gloves/gloves_2.png" alt="glove_0">
+                    </td>
+                    <td>
+
+                        <table class="prodViewName">
+
+                            <tr>
+                                <td>
+                                    <p id="productprice" style="margin:0; padding-bottom: 75px; padding-top: 100px; font-size: 1000%; font-weight: bold;">29,99€</p>
+                                    <div class="input-group">
+                                        <button class="minus" onclick="changeProdViewAmount(-1)">-</button>
+                                        <input type="text" value="1">
+                                        <button class="plus" onclick="changeProdViewAmount(+1)">+</button>
+                                    </div>
+                                    <button class="warenkorb" onclick="addToCart()">
+                                        <img src="graphics/cart.png" alt="add to cart">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="certs">
+                                    <img style="width: 50%; height: auto;" src="graphics/certs.jpg" alt="All certs of the ethical fashion foundation!">
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
         <div class="cartView" id="cartView"> <!--Warenkorbansicht-->
@@ -153,8 +188,8 @@
 
                 <tbody>
                     <tr>
-                        <td class="cartProdImg"> 
-                            <img src="graphics/gloves/gloves_2.png" alt="glove_0">
+                        <td class="cartProdImg" >
+                            <img  src="graphics/gloves/gloves_2.png" alt="glove_0">
                         </td>
                         <td>Yellow Gloves</td>
                         <td>1</td>

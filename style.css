@@ -141,7 +141,7 @@ li img{
     display: none;
 }
 
-.pruductView{
+.productView{
     display: none;
 }
 
@@ -158,6 +158,90 @@ li img{
     display: none;
 }
 
+.prodViewImg{
+    width: 15%;
+    height: auto;
+    border: 4px solid black;
+}
+.prodViewImg img{
+    width: 100%;
+    height: auto;
+}
+
+.prodViewTable{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.prodViewInfoTable{
+    width: 100%;
+}
+
+#top-left-back {
+    display: inline-block;
+    position: absolute;
+    top: 7%;
+    left: 1%;
+    z-index: 9999;
+    font-size: 50px;
+    background-color: indianred;
+}
+
+.input-group {
+    display: flex;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    margin:0;
+    padding-top: 75px;
+    padding-bottom: 10px;
+}
+
+.input-group input {
+    border: none;
+    background-color: grey;
+    outline: none;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    margin-left: 140px;
+    margin-right: 140px;
+    font-size: 400%;
+}
+.certs{
+    background-color: #2f2f31;
+}
+.prodViewName {
+    line-height: 0;
+    vertical-align: top;
+    padding-bottom: 0;
+    border: none;
+}
+
+.prodViewName td{
+    border: none;
+}
+
+.input-group button {
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 300%;
+    border: 3px solid black;
+    width: 80px;
+    height: 100px;
+}
+.warenkorb {
+    background-color: darkorange;
+    border: none;
+    width: 540px;
+    height: 100px;
+    margin-bottom: 75px;
+}
+.warenkorb img{
+    width: auto;
+    height: 70px;
+}
 
 .cartProdImg img{
     width: 20%;
@@ -175,7 +259,7 @@ td, th{
 
 table {
     border-collapse: collapse;
-}     
+}
 
 tr{
     border-bottom: 1px solid darkslategray;
