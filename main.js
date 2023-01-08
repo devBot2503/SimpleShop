@@ -17,14 +17,36 @@ function showElement(targetId){
 }
 
 
-const glovesProducts = [{name: "gloves_1", price: 19.99}, {name: "gloves_2", price: 19.99}, {name: "gloves_3", price: 13.99}, {name: "gloves_4", price: 19.99}, {name: "gloves_5", price: 19.99}, {name: "gloves_6", price: 22.99}, {name: "gloves_7", price: 19.99}, {name: "gloves_8", price: 19.99}];
+const glovesProducts = [
+    {name: "gloves_1", price: 19.99, color: "grün"},
+    {name: "gloves_2", price: 19.99, color: "orange"},
+    {name: "gloves_3", price: 13.99, color: "blau"},
+    {name: "gloves_4", price: 19.99, color: "orange"},
+    {name: "gloves_5", price: 19.99, color: "gelb"},
+    {name: "gloves_6", price: 22.99, color: "gelb"},
+    {name: "gloves_7", price: 19.99, color: "blau"},
+    {name: "gloves_8", price: 19.99, color: "orange"}
+];
 
-const scarfProducts = [{name: "scarf_1", price: 42.00}, {name: "scarf_2", price: 42.00}, {name: "scarf_3", price: 42.00}, {name: "scarf_4", price: 42.00}, {name: "scarf_5", price: 42.00}, {name: "scarf_6", price: 42.00}, {name: "scarf_7", price: 42.00}, {name: "scarf_8", price: 42.00}];
+const scarfProducts = [
+    {name: "scarf_1", price: 42.00, color: "blau"},
+    {name: "scarf_2", price: 42.00, color: "blau"},
+    {name: "scarf_3", price: 42.00, color: "pink"},
+    {name: "scarf_4", price: 42.00, color: "blau"},
+    {name: "scarf_5", price: 42.00, color: "gelb"},
+    {name: "scarf_6", price: 42.00, color: "lila"},
+    {name: "scarf_7", price: 42.00, color: "rot"},
+    {name: "scarf_8", price: 42.00, color: "grün"}
+];
 
 const categoryProducts = [
     {category: "gloves", products: glovesProducts},
     {category: "scarf", products: scarfProducts}
 ];
+
+
+
+
 
 /*
 Alexander Kehr
@@ -32,7 +54,7 @@ Die Funktion setzt den Page state, also die Ansicht innerhalb des viewManagers.
 @parameter = targetId
 */
 function setPageState(targetId){
-    const hiddenElements = ["categories", "prodView", "cartView", "checkout", "m|f", "coats", "sweater", "tshirts", "gloves", "hats", "glasses", "earrings", "scarfs", "trousers", "shorts", "shoes", "prodList"];
+    const hiddenElements = ["categories", "prodView", "cartView", "checkout", "m|f", "coats", "sweater", "tshirts", "gloves", "hats", "glasses", "earrings", "scarfs", "trousers", "shorts", "shoes","searchList", "prodList"];
     hiddenElements.forEach(e => {
         hideElement(e);
     })
@@ -217,7 +239,87 @@ function paypalSim() {
 
 }
 
-function setProdElements(target_name){
+
+function search() {
+    // Hole den Suchbegriff aus dem Eingabefeld
+    let searchTerm = document.querySelector('.search').value.toLowerCase();
+
+    // Erstelle eine Liste für die Suchergebnisse
+    let searchResults = [];
+
+    // Iteriere über die Kategorien und Produkte
+    for (let i = 0; i < categoryProducts.length; i++) {
+        let category = categoryProducts[i];
+        let products = category.products;
+        for (let j = 0; j < products.length; j++) {
+            let product = products[j];
+            // Prüfe, ob der Name oder die Kategorie des Produkts den Suchbegriff enthält
+
+            if (product.name.includes(searchTerm) || category.category.includes(searchTerm) || product.color.includes(searchTerm)) {
+                // Füge das Produkt zu den Suchergebnissen hinzu
+                searchResults.push(product);
+            }
+        }
+    }
+
+    // Setze den Seitenzustand auf "" (leer) und zeige die prodList-Ansicht an
+    setPageState("");
+    showElement("searchList");
+
+    // Leere die prodList-Ansicht
+    document.getElementById("searchList").innerHTML = "";
+    // Erstelle eine neue Zeile für die Suchergebnisse
+    let row = document.createElement("tr");
+
+    // Iteriere über die Suchergebnisse und füge sie zur prodList-Ansicht hinzu
+    for (let i = 0; i < searchResults.length; i++) {
+        let product = searchResults[i];
+        let category = categoryProducts.find(cat => cat.products.includes(product));
+        // Erstelle eine neue Zelle für das Produkt
+        let cell = document.createElement("td");
+        cell.style.borderTop = "2px solid black";
+        cell.style.borderBottom = "2px solid black";
+        // Erstelle ein Bild-Element für das Produkt
+        let img = document.createElement("img");
+        let table = document.createElement("table");
+        // Setze den Pfad des Bildes auf den Pfad der Kategorie
+// Set the path of the image to the path of the category and the product name
+        img.src = "./graphics/" + category.category + "/" + product.name + ".png";
+        img.id = product.name;
+
+        img.onclick = function() { prodOnClick(this) };
+// Add the image to the cell
+        cell.appendChild(img);
+// Create a new paragraph element for the price
+        let price = document.createElement("p");
+        price.id = "price_" + i;
+        price.innerText = product.price + "€";
+// Add the price to the cell
+        cell.appendChild(price);
+// Add the cell to the row
+        row.appendChild(cell);
+        table.appendChild(row);
+        // Check if the current row has 4 cells
+        if (row.childElementCount === 4) {
+            // If so, add the row to the prodList table and create a new row
+            document.getElementById("searchList").appendChild(table);
+            row = document.createElement("tr");
+        }
+    }
+// Check if the final row has less than 4 cells
+    if (row.childElementCount < 4) {
+        // If so, add the final row to the prodList table
+        let table = document.createElement("table");
+        table.appendChild(row);
+        document.getElementById("searchList").appendChild(table);
+    }
+}
+
+
+
+
+
+    function setProdElements(target_name){
     if(target_name == ""){
         alert("Out of stock, sorry :(");
         return;
@@ -302,7 +404,9 @@ function addToCart() {
     console.log(localStorage.getItem("cart"));
 }
 
+
 function back() {
+
     // Get the source of the main product image
     var imgSrc = document.querySelector(".prodViewImg img").src.split("/");
     // Determine the last opened category based on the image source
@@ -312,14 +416,17 @@ function back() {
     document.querySelector('input[type="text"]').value = 1;
     // Run the appropriate function for the last opened category
     if (category == "coats" || category == "sweater" || category == "tshirts" || category == "gloves") {
+        setPageState("");
         setPageState("categories");
         upperBodyOnClick();
         setProdElements(category);
     } else if (category == "hats" || category == "glasses" || category == "earrings" || category == "scarfs") {
+        setPageState("");
         setPageState("categories");
         headOnClick();
         setProdElements(category);
     } else if (category == "trousers" || category == "shorts" || category == "shoes") {
+        setPageState("");
         setPageState("categories");
         bottomOnClick();
         setProdElements(category);
@@ -327,14 +434,17 @@ function back() {
     //stupid fast bug fix folder structure
     category2 = category + "s";
     if (category2 == "coats" || category2 == "sweater" || category2 == "tshirts" || category2 == "gloves") {
+        setPageState("");
         setPageState("categories");
         upperBodyOnClick();
         setProdElements(category);
     } else if (category2 == "hats" || category2 == "glasses" || category2 == "earrings" || category2 == "scarfs") {
+        setPageState("");
         setPageState("categories");
         headOnClick();
         setProdElements(category);
     } else if (category2 == "trousers" || category2 == "shorts" || category2 == "shoes") {
+        setPageState("");
         setPageState("categories");
         bottomOnClick();
         setProdElements(category);

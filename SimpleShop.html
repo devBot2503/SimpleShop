@@ -20,7 +20,7 @@
             <button class="cart" src="" onclick="cartOnClick()"> <img style="width: 50%; height: auto;" src="graphics/cart.png" alt="cart"> </button>
         </div>
         <div class="inputHolder">
-            <input class="search" placeholder="search"></input>
+            <input class="search" placeholder="search" onkeydown="if (event.key === 'Enter') search()">
         </div>
     </ul>
 
@@ -82,7 +82,9 @@
                 </li>
             </div>
             <div class="prodList" id="prodList">
-            
+            </div>
+
+            <div class="searchList" id="searchList">
             </div>
         </div>
 
