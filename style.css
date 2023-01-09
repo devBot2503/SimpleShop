@@ -148,6 +148,8 @@ li img{
 
 .checkout{
     display: none;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .underCategorie{
@@ -176,6 +178,26 @@ li img{
 }
 .prodViewInfoTable{
     width: 100%;
+}
+.center {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+.spinning-wheel {
+    width: 50px;
+    height: 50px;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 #top-left-back {
@@ -273,6 +295,10 @@ caption{
     font-style: italic;
     font-size: 30px;
 }
+
+
+
+
 
 .prodList{
     position: absolute;
