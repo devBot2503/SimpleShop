@@ -76,7 +76,10 @@ function setPageState(targetId){
     hiddenElements.forEach(e => {
         hideElement(e);
     })
-    
+    //setPageState('m|f')
+    if(targetId == "m|f"){
+        document.querySelector('.search').value = "";
+    }
     if(targetId == ""){
         return
     }
