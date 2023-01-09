@@ -424,6 +424,11 @@ function updateCartButton() {
 }
 
 function back() {
+    let searchTerm = document.querySelector('.search').value.toLowerCase();
+    if(searchTerm != "") {
+        search();
+        return;
+    }
     // Get the source of the main product image
     var imgSrc = document.querySelector(".prodViewImg img").src.split("/");
     // Determine the last opened category based on the image source
