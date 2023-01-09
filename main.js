@@ -273,7 +273,7 @@ function search() {
     setPageState("");
     showElement("searchList");
 
-    const productsPerRow = 6;
+    const productsPerRow = 5;
 
     // Leere die prodList-Ansicht
     document.getElementById("searchList").innerHTML = "";
