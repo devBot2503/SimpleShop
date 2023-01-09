@@ -273,6 +273,8 @@ function search() {
     setPageState("");
     showElement("searchList");
 
+    const productsPerRow = 6;
+
     // Leere die prodList-Ansicht
     document.getElementById("searchList").innerHTML = "";
     // Erstelle eine neue Zeile für die Suchergebnisse
@@ -293,35 +295,34 @@ function search() {
         let div = document.createElement("div");
         let table = document.createElement("table");
         // Setze den Pfad des Bildes auf den Pfad der Kategorie
-// Set the path of the image to the path of the category and the product name
+        // Set the path of the image to the path of the category and the product name
         img.src = "./graphics/" + category.category + "/" + product.name + ".png";
         img.id = product.name;
 
-        img.onclick = function() { prodOnClick(this) };
-// Add the image to the cell
+        // Add the image to the cell
         cell.appendChild(img);
-// Create a new paragraph element for the price
+        // Create a new paragraph element for the price
         let price = document.createElement("p");
         price.id = "price_" + i;
         price.innerText = product.price + "€";
-// Add the price to the cell
+        // Add the price to the cell
         cell.appendChild(price);
         // onclick="prodOnClick(this)"
         cell.onclick = function() { prodOnClick(this) };
         // add hoverfix class
         cell.classList.add("hoverfix");
-// Add the cell to the row
+        // Add the cell to the row
         row.appendChild(cell);
         table.appendChild(row);
-        // Check if the current row has 4 cells
-        if (row.childElementCount === 4) {
+        // Check if the current row has max cells
+        if (row.childElementCount === productsPerRow) {
             // If so, add the row to the prodList table and create a new row
             document.getElementById("searchList").appendChild(table);
             row = document.createElement("tr");
         }
     }
-// Check if the final row has less than 4 cells
-    if (row.childElementCount < 4) {
+    // Check if the final row has less than max cells
+    if (row.childElementCount < productsPerRow) {
         // If so, add the final row to the prodList table
         let table = document.createElement("table");
         table.appendChild(row);
