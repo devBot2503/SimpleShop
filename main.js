@@ -342,7 +342,7 @@ function setProdElements(target_name){
         let price_id = "price_" + i;
         table += "    <td class=\"clickable-img\">\n";
         table += "<div onclick='prodOnClick(this)'>\n";
-        table += "      <img id=\"" + products[i-1].name + "\" src=\"" + imgPath + i + ".png\" onclick=\"prodOnClick(this)\"/>\n";
+        table += "      <img id=\"" + products[i-1].name + "\" src=\"" + imgPath + i + ".png\"/>\n";
         table += "      <p id=\"" + price_id + "\">" + products[i-1].price + "€</p>\n";
         table += "</div>\n";
         if(i % prodPerRow == 0){
