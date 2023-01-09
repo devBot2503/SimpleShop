@@ -341,7 +341,7 @@ function setProdElements(target_name){
     for(let i = 1; i <= prodPerPage; i++){ /* wir starten bei 1 weil das 0te img das generische categorien bild ist*/
         let price_id = "price_" + i;
         table += "    <td class=\"clickable-img\">\n";
-        table += "<div>\n";
+        table += "<div onclick='prodOnClick(this)'>\n";
         table += "      <img id=\"" + products[i-1].name + "\" src=\"" + imgPath + i + ".png\" onclick=\"prodOnClick(this)\"/>\n";
         table += "      <p id=\"" + price_id + "\">" + products[i-1].price + "€</p>\n";
         table += "</div>\n";
@@ -359,17 +359,18 @@ function setProdElements(target_name){
 function prodOnClick(clickedElement) {
     console.log(clickedElement);
     // Get the price of the clicked element
-    const target_name = clickedElement.id.split("_")[0];
-    const price  = categoryProducts.find(e => e.category == target_name).products.find(e => e.name == clickedElement.id).price;
+    const imgElement = clickedElement.querySelector("img");
+    const target_name = imgElement.id.split("_")[0];
+    const price  = categoryProducts.find(e => e.category == target_name).products.find(e => e.name == imgElement.id).price;
 
     // Get the src of the clicked image
-    const src = clickedElement.src;
+    const src = imgElement.src;
 
     setPageState("prodView");
     document.querySelector(".prodViewImg img").src = src;
     document.getElementById("productprice").innerHTML = price + "€";
-
 }
+
 
 function addToCart() {
 // Get the item name from the image source
