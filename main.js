@@ -246,7 +246,12 @@ function paypalSim() {
 function search() {
     // Hole den Suchbegriff aus dem Eingabefeld
     let searchTerm = document.querySelector('.search').value.toLowerCase();
-
+    if(searchTerm == "schal") {
+        searchTerm = "scarf";
+    }
+    if(searchTerm == "handschuhe") {
+        searchTerm = "gloves";
+    }
     // Erstelle eine Liste für die Suchergebnisse
     let searchResults = [];
 
@@ -322,7 +327,7 @@ function search() {
 
 
 
-    function setProdElements(target_name){
+function setProdElements(target_name){
     if(target_name == ""){
         alert("Out of stock, sorry :(");
         return;
