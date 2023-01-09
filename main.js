@@ -138,6 +138,9 @@ function cartOnClick() {
     showElement("cartView");
 // Get the cart from local storage
     let cart = JSON.parse(localStorage.getItem("cart"));
+    if (cart == null) {
+        cart = [];
+    }
 // Get the table body element
     let tableBody = document.querySelector("#waren tbody");
 // Clear the table body
