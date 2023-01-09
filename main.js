@@ -284,10 +284,13 @@ function search() {
         let category = categoryProducts.find(cat => cat.products.includes(product));
         // Erstelle eine neue Zelle für das Produkt
         let cell = document.createElement("td");
+        //add class clickable-img
+        cell.classList.add("clickable-img");
         cell.style.borderTop = "2px solid black";
         cell.style.borderBottom = "2px solid black";
         // Erstelle ein Bild-Element für das Produkt
         let img = document.createElement("img");
+        let div = document.createElement("div");
         let table = document.createElement("table");
         // Setze den Pfad des Bildes auf den Pfad der Kategorie
 // Set the path of the image to the path of the category and the product name
@@ -303,6 +306,10 @@ function search() {
         price.innerText = product.price + "€";
 // Add the price to the cell
         cell.appendChild(price);
+        // onclick="prodOnClick(this)"
+        cell.onclick = function() { prodOnClick(this) };
+        // add hoverfix class
+        cell.classList.add("hoverfix");
 // Add the cell to the row
         row.appendChild(cell);
         table.appendChild(row);

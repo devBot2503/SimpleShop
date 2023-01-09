@@ -143,7 +143,14 @@ li img{
     background-color: lightgrey;
     cursor: pointer;
 }
-
+td.hoverfix:hover{
+    background-color: lightgrey;
+    cursor: pointer;
+}
+.hoverfix :not(.no-hover) :hover {
+    filter: saturate(200%);
+    cursor: pointer;
+}
 .headAdjustments{
     max-width: 80px;
 }
