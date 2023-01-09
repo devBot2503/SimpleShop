@@ -192,7 +192,6 @@ function cartOnClick() {
         tableBody.appendChild(tableRow);
 // Update the total price
         totalPrice += cart[i].price * cart[i].quantity;
-        console.log(cart[i].price, cart[i].quantity, totalPrice);
     }
 // Display the total price
     document.querySelector('.total').textContent = 'Total: ' + totalPrice.toFixed(2) + '€';
@@ -357,7 +356,6 @@ function setProdElements(target_name){
 }
 
 function prodOnClick(clickedElement) {
-    console.log(clickedElement);
     // Get the price of the clicked element
     const imgElement = clickedElement.querySelector("img");
     const target_name = imgElement.id.split("_")[0];
@@ -373,7 +371,7 @@ function prodOnClick(clickedElement) {
 
 
 function addToCart() {
-// Get the item name from the image source
+    // Get the item name from the image source
     let imgSrc = document.querySelector(".prodViewImg img").src;
     let item = imgSrc.substring(imgSrc.indexOf('graphics'));
     //get imagepath clean
@@ -383,7 +381,7 @@ function addToCart() {
     let price = document.getElementById("productprice").innerHTML;
     //remove €
     price = price.substring(0, price.length - 1);
-// Check if the shopping cart exists in local storage
+    // Check if the shopping cart exists in local storage
     if (localStorage.getItem("cart") === null) {
         // If not, create an empty cart
         let cart = [];
@@ -392,27 +390,26 @@ function addToCart() {
         // Save the cart to local storage
         localStorage.setItem("cart", JSON.stringify(cart));
     } else {
-// If the cart exists, get it from local storage
+        // If the cart exists, get it from local storage
         let cart = JSON.parse(localStorage.getItem("cart"));
-// Check if the item is already in the cart
+        // Check if the item is already in the cart
         let itemExists = false;
         for (let i = 0; i < cart.length; i++) {
             if (cart[i].item == item) {
-// If it is, update the quantity
+                // If it is, update the quantity
                 cart[i].quantity += quantity;
                 itemExists = true;
             }
         }
-// If the item is not in the cart, add it
+        // If the item is not in the cart, add it
         if (!itemExists) {
             cart.push({item: item, quantity: quantity, price: price});
         }
-// Save the updated cart to local storage
+        // Save the updated cart to local storage
         localStorage.setItem("cart", JSON.stringify(cart));
     }
     alert("👍");
 
-    console.log(localStorage.getItem("cart"));
 }
 
 
@@ -422,7 +419,6 @@ function back() {
     var imgSrc = document.querySelector(".prodViewImg img").src.split("/");
     // Determine the last opened category based on the image source
     var category = imgSrc[imgSrc.length - 2];
-    console.log(category);
     
     document.querySelector('input[type="text"]').value = 1;
     // Run the appropriate function for the last opened category
