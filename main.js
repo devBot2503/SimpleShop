@@ -1,22 +1,3 @@
-/*
-Alexander Kehr
-Die Funktion lässt elemente verschwinden
-@parameter = targetId
-*/
-function hideElement(targetId){
-    document.getElementById(targetId).style.display = "none";
-}
-
-/*
-Alexander Kehr
-Die Funktion lässt elemente erscheinen
-@parameter = targetId
-*/
-function showElement(targetId){
-    document.getElementById(targetId).style.display = "block";
-}
-
-
 const glovesProducts = [
     {name: "gloves_1", price: 19.99, color: "grün"},
     {name: "gloves_2", price: 19.99, color: "orange"},
@@ -45,8 +26,23 @@ const categoryProducts = [
 ];
 
 
+/*
+Alexander Kehr
+Die Funktion lässt elemente verschwinden
+@parameter = targetId
+*/
+function hideElement(targetId){
+    document.getElementById(targetId).style.display = "none";
+}
 
-
+/*
+Alexander Kehr
+Die Funktion lässt elemente erscheinen
+@parameter = targetId
+*/
+function showElement(targetId){
+    document.getElementById(targetId).style.display = "block";
+}
 
 /*
 Alexander Kehr
@@ -64,11 +60,6 @@ function setPageState(targetId){
     }
     showElement(targetId);
 }
-
-/*
-Alexander Kehr
-Es folgen ein paar onClick Funktionen welche selbsterklärend sind
-*/
 
 function maleOnClick(){
     setPageState("categories");
@@ -133,42 +124,42 @@ function removeFromCart(item) {
 }
 
 function cartOnClick() {
-// Load the cart view
+    // Load the cart view
     setPageState("");
     showElement("cartView");
-// Get the cart from local storage
+    // Get the cart from local storage
     let cart = JSON.parse(localStorage.getItem("cart"));
     if (cart == null) {
         cart = [];
     }
-// Get the table body element
+    // Get the table body element
     let tableBody = document.querySelector("#waren tbody");
-// Clear the table body
+    // Clear the table body
     tableBody.innerHTML = "";
-// Total price of items in the cart
+    // Total price of items in the cart
     let totalPrice = 0;
-// Loop through the items in the cart
+    // Loop through the items in the cart
     for (let i = 0; i < cart.length; i++) {
-// Create a new table row
+        // Create a new table row
         let tableRow = document.createElement("tr");
-// Create the product image cell
+        // Create the product image cell
         let prodImgCell = document.createElement("td");
         prodImgCell.classList.add("cartProdImg");
-// Create the product image
+        // Create the product image
         let prodImg = document.createElement("img");
         prodImg.src = 'graphics/' + cart[i].item;
         prodImg.alt = cart[i].item;
-// Add the image to the cell
+        // Add the image to the cell
         prodImgCell.appendChild(prodImg);
-// Create the product name cell
+        // Create the product name cell
         let prodNameCell = document.createElement("td");
         let itemParts = cart[i].item.split('/');
         var name = itemParts[1].slice(0, -4);
         prodNameCell.textContent = name;
-// Create the quantity cell
+        // Create the quantity cell
         let quantityCell = document.createElement("td");
         quantityCell.textContent = cart[i].quantity;
-// Create the price cell
+        // Create the price cell
         let price = cart[i].price.replace(',', '.');
         price = parseFloat(price);
         let quantity = parseInt(cart[i].quantity);
@@ -178,22 +169,22 @@ function cartOnClick() {
         // Create a remove button cell
         let removeButtonCell = document.createElement("td");
 
-// Create the remove button
+        // Create the remove button
         let removeButton = document.createElement("button");
         removeButton.innerHTML = "X";
         removeButton.setAttribute("onclick", "removeFromCart('"+cart[i].item+"')");
 
-// Add the button to the cell
+        // Add the button to the cell
         removeButtonCell.appendChild(removeButton);
 
-// Add the cells to the table row
+        // Add the cells to the table row
         [prodImgCell, prodNameCell, quantityCell, priceCell, removeButtonCell].forEach(e => {tableRow.appendChild(e)});
-// Add the table row to the table body
+        // Add the table row to the table body
         tableBody.appendChild(tableRow);
-// Update the total price
+        // Update the total price
         totalPrice += cart[i].price * cart[i].quantity;
     }
-// Display the total price
+    // Display the total price
     document.querySelector('.total').textContent = 'Total: ' + totalPrice.toFixed(2) + '€';
 }
 
@@ -241,7 +232,6 @@ function paypalSim() {
 
 }
 
-
 function search() {
     // Hole den Suchbegriff aus dem Eingabefeld
     let searchTerm = document.querySelector('.search').value.toLowerCase();
@@ -273,7 +263,7 @@ function search() {
     setPageState("");
     showElement("searchList");
 
-    const productsPerRow = 6;
+    const productsPerRow = 5;
 
     // Leere die prodList-Ansicht
     document.getElementById("searchList").innerHTML = "";
@@ -330,10 +320,6 @@ function search() {
     }
 }
 
-
-
-
-
 function setProdElements(target_name){
     if(target_name == ""){
         alert("Out of stock, sorry :(");
@@ -377,7 +363,6 @@ function prodOnClick(clickedElement) {
     document.getElementById("productprice").innerHTML = price + "€";
 }
 
-
 function addToCart() {
     // Get the item name from the image source
     let imgSrc = document.querySelector(".prodViewImg img").src;
@@ -420,9 +405,7 @@ function addToCart() {
 
 }
 
-
 function back() {
-
     // Get the source of the main product image
     var imgSrc = document.querySelector(".prodViewImg img").src.split("/");
     // Determine the last opened category based on the image source
