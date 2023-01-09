@@ -16,6 +16,24 @@ function showElement(targetId){
     document.getElementById(targetId).style.display = "block";
 }
 
+function updateCartButton() {
+    // Get the cart button element
+    const cartButton = document.querySelector('.cart');
+
+    // Get the value of the "cart" key in the local storage
+    const cartValue = localStorage.getItem("cart");
+
+    // Check if cartvalue array is empty
+    if (cartValue === null || cartValue.length === 0 || cartValue === "[]") {
+        // If the value is null, set the src of the cart button image to "graphics/cart.png"
+        cartButton.querySelector('img').src = "graphics/cart.png";
+    } else {
+        // If the value is not null, set the src of the cart button image to "graphics/cart_full.png"
+        cartButton.querySelector('img').src = "graphics/cart_full.png";
+    }
+}
+
+setInterval(updateCartButton, 1000);
 
 const glovesProducts = [
     {name: "gloves_1", price: 19.99, color: "grün"},
@@ -309,8 +327,7 @@ function search() {
         cell.appendChild(price);
         // onclick="prodOnClick(this)"
         cell.onclick = function() { prodOnClick(this) };
-        // add hoverfix class
-        cell.classList.add("hoverfix");
+        // add hoverfix
         // Add the cell to the row
         row.appendChild(cell);
         table.appendChild(row);
