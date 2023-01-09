@@ -340,9 +340,11 @@ function setProdElements(target_name){
     let table = "<table>\n  <tr>\n";
     for(let i = 1; i <= prodPerPage; i++){ /* wir starten bei 1 weil das 0te img das generische categorien bild ist*/
         let price_id = "price_" + i;
-        table += "    <td>\n";
+        table += "    <td class=\"clickable-img\">\n";
+        table += "<div>\n";
         table += "      <img id=\"" + products[i-1].name + "\" src=\"" + imgPath + i + ".png\" onclick=\"prodOnClick(this)\"/>\n";
         table += "      <p id=\"" + price_id + "\">" + products[i-1].price + "€</p>\n";
+        table += "</div>\n";
         if(i % prodPerRow == 0){
             table += "  </tr>\n";
             if(i != prodPerPage){

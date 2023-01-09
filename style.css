@@ -23,6 +23,11 @@ li{
     cursor: pointer;
 }
 
+.clickable-img :hover{
+    background-color: #4444;
+    cursor: pointer;
+}
+
 .viewManager{
     display: -webkit-flex;
     display: flex;
@@ -132,6 +137,7 @@ li img{
 
 .categories li :hover{
     background-color: lightgrey;
+    cursor: pointer;
 }
 
 .headAdjustments{
