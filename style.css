@@ -23,8 +23,12 @@ li{
     cursor: pointer;
 }
 
-.clickable-img :hover{
+.clickable-img > :hover{
     background-color: #4444;
+    cursor: pointer;
+}
+.clickable-img :not(.no-hover) :hover {
+    filter: saturate(200%);
     cursor: pointer;
 }
 
