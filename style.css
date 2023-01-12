@@ -183,7 +183,9 @@ td.clickable-img.hoverfix:hover:not(img):not(p) {
 .cartView{
     display: none;
 }
-
+.wishlistView{
+    display: none;
+}
 .prodViewImg{
     width: 15%;
     height: auto;
@@ -283,6 +285,14 @@ td.clickable-img.hoverfix:hover:not(img):not(p) {
     width: 540px;
     height: 100px;
     margin-bottom: 75px;
+}
+.wishlistbuttom {
+    background-color: darkred;
+    border: none;
+    width: 540px;
+    height: 100px;
+    margin-bottom: 75px;
+    font-size: 50px;
 }
 .warenkorb img{
     width: auto;

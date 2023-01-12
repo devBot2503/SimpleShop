@@ -117,6 +117,9 @@
                                     <button class="warenkorb" onclick="addToCart()">
                                         <img src="graphics/cart.png" alt="add to cart">
                                     </button>
+                                    <button class="wishlistbuttom" id="wishlistbuttom" onclick="addToWishlist()">
+                                        ❤
+                                    </button>
                                 </td>
                             </tr>
                             <tr>
@@ -132,6 +135,53 @@
             </table>
         </div>
 
+        <div class="wishlistView" id="wishlistView"> <!--Warenkorbansicht-->
+            <table id="waren2">
+                <caption>Your Wishlist!</caption>
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td class="cartProdImg" >
+                        <img  src="graphics/gloves/gloves_2.png" alt="glove_0">
+                    </td>
+                    <td>Yellow Gloves</td>
+                    <td>49,00€</td>
+                    <td>
+                        <button onclick="removeFromCart(this)">X</button>
+                    </td>
+                </tr>
+                </tbody>
+
+
+            </table>
+            <p class="total" id="total">Gesamtsumme: 49,00€</p>
+            <br><br>
+            <style>
+                .paypal-button2 {
+                    background-color: red;
+                    border: none;
+                    color: white;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    float: right;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                }
+            </style>
+            <br><br>
+            <button class="paypal-button2" onclick="clearWishlist()">Clear Wishlist</button>
+        </div>
 
         <div class="cartView" id="cartView"> <!--Warenkorbansicht-->
             <table id="waren">

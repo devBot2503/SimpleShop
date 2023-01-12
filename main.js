@@ -1,4 +1,4 @@
-setInterval(updateCartButton, 1000);
+
 
 const glovesProducts = [
     {name: "gloves_1", price: 19.99, color: "grün"},
@@ -52,7 +52,7 @@ Die Funktion setzt den Page state, also die Ansicht innerhalb des viewManagers.
 @parameter = targetId
 */
 function setPageState(targetId){
-    const hiddenElements = ["categories", "prodView", "cartView", "checkout", "m|f", "coats", "sweater", "tshirts", "gloves", "hats", "glasses", "earrings", "scarfs", "trousers", "shorts", "shoes","searchList", "prodList"];
+    const hiddenElements = ["categories", "prodView", "cartView", "checkout","wishlistView", "m|f", "coats", "sweater", "tshirts", "gloves", "hats", "glasses", "earrings", "scarfs", "trousers", "shorts", "shoes","searchList", "prodList"];
     hiddenElements.forEach(e => {
         hideElement(e);
     })
@@ -103,6 +103,61 @@ function bottomOnClick(){
     showElement("shoes");
 }
 
+function clearWishlist(){
+    localStorage.setItem("wishlist", JSON.stringify([]));
+    wishlistOnClick();
+}
+function removeFromWishlist(item) {
+    // Get the cart from local storage
+    let cart = JSON.parse(localStorage.getItem("wishlist"));
+
+    // Find the index of the item in the cart
+    let index = -1;
+    for (let i = 0; i < cart.length; i++) {
+        if (cart[i].item == item) {
+            index = i;
+            break;
+        }
+    }
+
+    // If the item was found in the cart, remove it
+    if (index != -1) {
+        cart.splice(index, 1);
+    }
+
+    // Save the updated cart to local storage
+    localStorage.setItem("wishlist", JSON.stringify(cart));
+
+    // Reload the cart view
+    wishlistOnClick();
+}
+function removeFromWishlist2(item) {
+    // Get the cart from local storage
+    let cart = JSON.parse(localStorage.getItem("wishlist"));
+
+    // Find the index of the item in the cart
+    let index = -1;
+    for (let i = 0; i < cart.length; i++) {
+        if (cart[i].item == item) {
+            index = i;
+            break;
+        }
+    }
+
+    // If the item was found in the cart, remove it
+    if (index != -1) {
+        cart.splice(index, 1);
+    }
+
+    // Save the updated cart to local storage
+    localStorage.setItem("wishlist", JSON.stringify(cart));
+
+    //change button text to "add to wishlist"
+    document.getElementById("wishlistbuttom").innerHTML = "❤";
+    //change function to addToWishlist
+
+    document.getElementById("wishlistbuttom").setAttribute("onclick", "addToWishlist()");
+}
 function removeFromCart(item) {
     // Get the cart from local storage
     let cart = JSON.parse(localStorage.getItem("cart"));
@@ -129,6 +184,7 @@ function removeFromCart(item) {
 }
 
 function cartOnClick() {
+
     // Load the cart view
     setPageState("");
     showElement("cartView");
@@ -141,6 +197,7 @@ function cartOnClick() {
     let tableBody = document.querySelector("#waren tbody");
     // Clear the table body
     tableBody.innerHTML = "";
+
     // Total price of items in the cart
     let totalPrice = 0;
     // Loop through the items in the cart
@@ -184,6 +241,70 @@ function cartOnClick() {
 
         // Add the cells to the table row
         [prodImgCell, prodNameCell, quantityCell, priceCell, removeButtonCell].forEach(e => {tableRow.appendChild(e)});
+        // Add the table row to the table body
+        tableBody.appendChild(tableRow);
+        // Update the total price
+        totalPrice += cart[i].price * cart[i].quantity;
+    }
+    // Display the total price
+    document.querySelector('.total').textContent = 'Total: ' + totalPrice.toFixed(2) + '€';
+}
+function wishlistOnClick() {
+    // Load the cart view
+    setPageState("");
+    showElement("wishlistView");
+    // Get the cart from local storage
+    let cart = JSON.parse(localStorage.getItem("wishlist"));
+    if (cart == null) {
+        cart = [];
+    }
+    // Get the table body element
+    let tableBody = document.querySelector("#waren2 tbody");
+    // Clear the table body
+    tableBody.innerHTML = "";
+    // Total price of items in the cart
+    let totalPrice = 0;
+    // Loop through the items in the cart
+    for (let i = 0; i < cart.length; i++) {
+        // Create a new table row
+        let tableRow = document.createElement("tr");
+        // Create the product image cell
+        let prodImgCell = document.createElement("td");
+        prodImgCell.classList.add("cartProdImg");
+        // Create the product image
+        let prodImg = document.createElement("img");
+        prodImg.src = 'graphics/' + cart[i].item;
+        prodImg.alt = cart[i].item;
+        // Add the image to the cell
+        prodImgCell.appendChild(prodImg);
+        // Create the product name cell
+        let prodNameCell = document.createElement("td");
+        let itemParts = cart[i].item.split('/');
+        var name = itemParts[1].slice(0, -4);
+        prodNameCell.textContent = name;
+        // Create the quantity cell
+        let quantityCell = document.createElement("td");
+        quantityCell.textContent = cart[i].quantity;
+        // Create the price cell
+        let price = cart[i].price.replace(',', '.');
+        price = parseFloat(price);
+        //let quantity = parseInt(cart[i].quantity);
+        let priceCell = document.createElement("td");
+        priceCell.textContent = ( price).toFixed(2) + '€';
+
+        // Create a remove button cell
+        let removeButtonCell = document.createElement("td");
+
+        // Create the remove button
+        let removeButton = document.createElement("button");
+        removeButton.innerHTML = "X";
+        removeButton.setAttribute("onclick", "removeFromWishlist('"+cart[i].item+"')");
+
+        // Add the button to the cell
+        removeButtonCell.appendChild(removeButton);
+
+        // Add the cells to the table row
+        [prodImgCell, prodNameCell, priceCell, removeButtonCell].forEach(e => {tableRow.appendChild(e)});
         // Add the table row to the table body
         tableBody.appendChild(tableRow);
         // Update the total price
@@ -362,9 +483,69 @@ function prodOnClick(clickedElement) {
     // Get the src of the clicked image
     const src = imgElement.src;
 
+    //cut src from http://localhost:63342/SimpleShop/graphics/scarf/scarf_1.png to scarf/scarf_1.png
+    const src_cut = src.split("graphics/")[1];
+
     setPageState("prodView");
     document.querySelector(".prodViewImg img").src = src;
     document.getElementById("productprice").innerHTML = price + "€";
+    //check if product is in wishlist
+    localStorage.getItem("wishlist")
+    //change addToWishlist button with the function to remove from wishlist removeFromWishlist
+    if(localStorage.getItem("wishlist").includes(imgElement.id)){
+        document.getElementById("wishlistbuttom").innerHTML = "Remove from wishlist";
+        document.getElementById("wishlistbuttom").onclick = null;
+        console.log(imgElement.src);
+        document.getElementById("wishlistbuttom").onclick = function() { removeFromWishlist2(src_cut) };
+    } else {
+        document.getElementById("wishlistbuttom").onclick = null;
+        document.getElementById("wishlistbuttom").innerHTML = "❤";
+        document.getElementById("wishlistbuttom").onclick = function() { addToWishlist(src_cut) };
+    }
+}
+
+function addToWishlist() {
+    // Get the item name from the image source
+    let imgSrc = document.querySelector(".prodViewImg img").src;
+    let item = imgSrc.substring(imgSrc.indexOf('graphics'));
+    //get imagepath clean
+    item = item.substring(9);
+    // Get the quantity from the input field
+    let quantity = parseInt(document.querySelector('input[type="text"]').value);
+    let price = document.getElementById("productprice").innerHTML;
+    //remove €
+    price = price.substring(0, price.length - 1);
+    // Check if the shopping cart exists in local storage
+    if (localStorage.getItem("wishlist") === null) {
+        // If not, create an empty cart
+        let cart = [];
+        // Add the item to the cart
+        cart.push({item: item, quantity: quantity, price: price});
+        // Save the cart to local storage
+        localStorage.setItem("wishlist", JSON.stringify(cart));
+    } else {
+        // If the cart exists, get it from local storage
+        let cart = JSON.parse(localStorage.getItem("wishlist"));
+        // Check if the item is already in the cart
+        let itemExists = false;
+        for (let i = 0; i < cart.length; i++) {
+            if (cart[i].item == item) {
+                // If it is, update the quantity
+                cart[i].quantity += quantity;
+                itemExists = true;
+            }
+        }
+        // If the item is not in the cart, add it
+        if (!itemExists) {
+            cart.push({item: item, quantity: quantity, price: price});
+        }
+        // Save the updated cart to local storage
+        localStorage.setItem("wishlist", JSON.stringify(cart));
+    }
+    //change addToWishlist button with the function to remove from wishlist removeFromWishlist
+    document.getElementById("wishlistbuttom").innerHTML = "Remove from wishlist";
+    document.getElementById("wishlistbuttom").onclick = null;
+    document.getElementById("wishlistbuttom").onclick = function() { removeFromWishlist2(item) };
 }
 
 function addToCart() {
@@ -409,22 +590,6 @@ function addToCart() {
 
 }
 
-function updateCartButton() {
-    // Get the cart button element
-    const cartButton = document.querySelector('.cart');
-
-    // Get the value of the "cart" key in the local storage
-    const cartValue = localStorage.getItem("cart");
-
-    // Check if cartvalue array is empty
-    if (cartValue === null || cartValue.length === 0 || cartValue === "[]") {
-        // If the value is null, set the src of the cart button image to "graphics/cart.png"
-        cartButton.querySelector('img').src = "graphics/cart.png";
-    } else {
-        // If the value is not null, set the src of the cart button image to "graphics/cart_full.png"
-        cartButton.querySelector('img').src = "graphics/cart_full.png";
-    }
-}
 
 function back() {
     let searchTerm = document.querySelector('.search').value.toLowerCase();
@@ -473,6 +638,23 @@ function back() {
         bottomOnClick();
         setProdElements(category);
     }
-
-
 }
+
+function updateCartButton() {
+    // Get the cart button element
+    const cartButton = document.querySelector('.cart');
+
+    // Get the value of the "cart" key in the local storage
+    const cartValue = localStorage.getItem("cart");
+
+    // Check if cartvalue array is empty
+    if (cartValue === null || cartValue.length === 0 || cartValue === "[]") {
+        // If the value is null, set the src of the cart button image to "graphics/cart.png"
+        cartButton.querySelector('img').src = "graphics/cart.png";
+    } else {
+        // If the value is not null, set the src of the cart button image to "graphics/cart_full.png"
+        cartButton.querySelector('img').src = "graphics/cart_full.png";
+    }
+}
+
+setInterval(updateCartButton, 1000);
