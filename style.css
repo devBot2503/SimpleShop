@@ -47,12 +47,10 @@ li{
 
 .search{
     background-color: lightgrey;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
     border-style: hidden;
     position: relative;
     float: right;
-    margin-left: 20px;
+    margin-left: 0px;
     max-width: 100%;
     height: 38px;
     width: 250px;
@@ -60,6 +58,17 @@ li{
 }
 
 
+.wishlist{
+    position: relative;
+    font-size: 25px;
+    width: 60px;
+    height: 40px;
+    border-style: none;
+    background-color: indianred;
+    float: right;
+    margin-left: 0px;
+    margin-right: 0px;
+}
 
 .cart{
     position: relative;
@@ -143,14 +152,11 @@ li img{
     background-color: lightgrey;
     cursor: pointer;
 }
-td.hoverfix:hover{
+td.clickable-img.hoverfix:hover:not(img):not(p) {
     background-color: lightgrey;
     cursor: pointer;
 }
-.hoverfix :not(.no-hover) :hover {
-    filter: saturate(200%);
-    cursor: pointer;
-}
+
 .headAdjustments{
     max-width: 80px;
 }
