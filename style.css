@@ -57,7 +57,17 @@ li{
     text-indent: 10px;
 }
 
-
+.wishlist2{
+    position: relative;
+    font-size: 25px;
+    width: 60px;
+    height: 40px;
+    border-style: none;
+    background-color: cornflowerblue;
+    float: right;
+    margin-left: 0px;
+    margin-right: 0px;
+}
 .wishlist{
     position: relative;
     font-size: 25px;

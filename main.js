@@ -639,6 +639,16 @@ function back() {
         setProdElements(category);
     }
 }
+function disabledOnClick() {
+
+    // switch class wishlist2 innerhtml from ♿ to 🙋
+    if(document.getElementById("wishlist2").innerText == "♿") {
+        document.getElementById("wishlist2").innerText = "🙋";
+    } else {
+        document.getElementById("wishlist2").innerText = "♿";
+    }
+
+}
 
 function updateCartButton() {
     // Get the cart button element
@@ -658,3 +668,13 @@ function updateCartButton() {
 }
 
 setInterval(updateCartButton, 1000);
+
+document.addEventListener("click", function(event) {
+    if(document.getElementById("wishlist2").innerHTML == "♿") {
+        var elementText = event.target.innerText;
+        var elementName = event.target.nodeName;
+
+        var msg = new SpeechSynthesisUtterance(elementText || elementName);
+        window.speechSynthesis.speak(msg);
+    }
+});
