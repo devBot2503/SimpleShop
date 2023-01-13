@@ -1,5 +1,6 @@
-
-
+/*
+Product Definition
+*/
 const glovesProducts = [
     {name: "gloves_1", price: 19.99, color: "grün"},
     {name: "gloves_2", price: 19.99, color: "orange"},
@@ -255,15 +256,20 @@ function wishlistOnClick() {
     showElement("wishlistView");
     // Get the cart from local storage
     let cart = JSON.parse(localStorage.getItem("wishlist"));
-    if (cart == null) {
+    if (cart == null || cart.length == 0) {
         cart = [];
+        let tableBody = document.querySelector("#waren2 tbody");
+        let tableRow = document.createElement("tr");
+        let prodNameCell = document.createElement("td");
+        prodNameCell.textContent = "Merkliste ist leer";
+        tableRow.appendChild(prodNameCell);
+        tableBody.appendChild(tableRow);
+
     }
     // Get the table body element
     let tableBody = document.querySelector("#waren2 tbody");
     // Clear the table body
     tableBody.innerHTML = "";
-    // Total price of items in the cart
-    let totalPrice = 0;
     // Loop through the items in the cart
     for (let i = 0; i < cart.length; i++) {
         // Create a new table row
@@ -307,11 +313,7 @@ function wishlistOnClick() {
         [prodImgCell, prodNameCell, priceCell, removeButtonCell].forEach(e => {tableRow.appendChild(e)});
         // Add the table row to the table body
         tableBody.appendChild(tableRow);
-        // Update the total price
-        totalPrice += cart[i].price * cart[i].quantity;
     }
-    // Display the total price
-    document.querySelector('.total').textContent = 'Total: ' + totalPrice.toFixed(2) + '€';
 }
 
 function changeProdViewAmount(amount) {
@@ -590,7 +592,6 @@ function addToCart() {
 
 }
 
-
 function back() {
     let searchTerm = document.querySelector('.search').value.toLowerCase();
     if(searchTerm != "") {
@@ -639,6 +640,7 @@ function back() {
         setProdElements(category);
     }
 }
+
 function disabledOnClick() {
 
     // switch class wishlist2 innerhtml from ♿ to 🙋

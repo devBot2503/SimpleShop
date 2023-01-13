@@ -325,7 +325,11 @@ td, th{
 
 table {
     border-collapse: collapse;
+    width: 100%;
 }
+
+table.fixed { table-layout:fixed; }
+table.fixed td { overflow: hidden; }
 
 tr{
     border-bottom: 1px solid darkslategray;
