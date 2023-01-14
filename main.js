@@ -28,6 +28,8 @@ const categoryProducts = [
     {category: "scarf", products: scarfProducts}
 ];
 
+let pageState = "m|f";
+let prevPage = "";
 
 /*
 Alexander Kehr
@@ -53,6 +55,9 @@ Die Funktion setzt den Page state, also die Ansicht innerhalb des viewManagers.
 @parameter = targetId
 */
 function setPageState(targetId){
+    prevPage = pageState;
+    pageState = targetId;
+    console.log("pageState: " + pageState + "  prevPage: " + prevPage);
     const hiddenElements = ["categories", "prodView", "cartView", "checkout","wishlistView", "m|f", "coats", "sweater", "tshirts", "gloves", "hats", "glasses", "earrings", "scarfs", "trousers", "shorts", "shoes","searchList", "prodList"];
     hiddenElements.forEach(e => {
         hideElement(e);
@@ -187,8 +192,7 @@ function removeFromCart(item) {
 function cartOnClick() {
 
     // Load the cart view
-    setPageState("");
-    showElement("cartView");
+    setPageState("cartView");
     // Get the cart from local storage
     let cart = JSON.parse(localStorage.getItem("cart"));
     if (cart == null) {
@@ -205,6 +209,8 @@ function cartOnClick() {
     for (let i = 0; i < cart.length; i++) {
         // Create a new table row
         let tableRow = document.createElement("tr");
+        tableRow.setAttribute("class", "cartRow");
+        tableRow.setAttribute("onclick", "prodOnClick(this)");
         // Create the product image cell
         let prodImgCell = document.createElement("td");
         prodImgCell.classList.add("cartProdImg");
@@ -212,6 +218,7 @@ function cartOnClick() {
         let prodImg = document.createElement("img");
         prodImg.src = 'graphics/' + cart[i].item;
         prodImg.alt = cart[i].item;
+        prodImg.id = cart[i].item.split("/")[1].slice(0, -4);
         // Add the image to the cell
         prodImgCell.appendChild(prodImg);
         // Create the product name cell
@@ -252,8 +259,7 @@ function cartOnClick() {
 }
 function wishlistOnClick() {
     // Load the cart view
-    setPageState("");
-    showElement("wishlistView");
+    setPageState("wishlistView");
     // Get the cart from local storage
     let cart = JSON.parse(localStorage.getItem("wishlist"));
     if (cart == null || cart.length == 0) {
@@ -274,6 +280,8 @@ function wishlistOnClick() {
     for (let i = 0; i < cart.length; i++) {
         // Create a new table row
         let tableRow = document.createElement("tr");
+        tableRow.setAttribute("class", "cartRow");
+        tableRow.setAttribute("onclick", "prodOnClick(this)");
         // Create the product image cell
         let prodImgCell = document.createElement("td");
         prodImgCell.classList.add("cartProdImg");
@@ -281,6 +289,7 @@ function wishlistOnClick() {
         let prodImg = document.createElement("img");
         prodImg.src = 'graphics/' + cart[i].item;
         prodImg.alt = cart[i].item;
+        prodImg.id = cart[i].item.split("/")[1].slice(0, -4);
         // Add the image to the cell
         prodImgCell.appendChild(prodImg);
         // Create the product name cell
@@ -388,8 +397,7 @@ function search() {
     }
 
     // Setze den Seitenzustand auf "" (leer) und zeige die prodList-Ansicht an
-    setPageState("");
-    showElement("searchList");
+    setPageState("searchList");
 
     const productsPerRow = 5;
 
@@ -479,6 +487,7 @@ function setProdElements(target_name){
 function prodOnClick(clickedElement) {
     // Get the price of the clicked element
     const imgElement = clickedElement.querySelector("img");
+    
     const target_name = imgElement.id.split("_")[0];
     const price  = categoryProducts.find(e => e.category == target_name).products.find(e => e.name == imgElement.id).price;
 
@@ -497,7 +506,6 @@ function prodOnClick(clickedElement) {
     if(localStorage.getItem("wishlist").includes(imgElement.id)){
         document.getElementById("wishlistbuttom").innerHTML = "Remove from wishlist";
         document.getElementById("wishlistbuttom").onclick = null;
-        console.log(imgElement.src);
         document.getElementById("wishlistbuttom").onclick = function() { removeFromWishlist2(src_cut) };
     } else {
         document.getElementById("wishlistbuttom").onclick = null;
@@ -594,50 +602,48 @@ function addToCart() {
 
 function back() {
     let searchTerm = document.querySelector('.search').value.toLowerCase();
-    if(searchTerm != "") {
+    if(searchTerm != "" && prevPage == "searchList") {
         search();
         return;
     }
-    // Get the source of the main product image
-    var imgSrc = document.querySelector(".prodViewImg img").src.split("/");
-    // Determine the last opened category based on the image source
-    var category = imgSrc[imgSrc.length - 2];
-    
-    document.querySelector('input[type="text"]').value = 1;
-    // Run the appropriate function for the last opened category
-    if (category == "coats" || category == "sweater" || category == "tshirts" || category == "gloves") {
-        setPageState("");
-        setPageState("categories");
-        upperBodyOnClick();
-        setProdElements(category);
-    } else if (category == "hats" || category == "glasses" || category == "earrings" || category == "scarfs") {
-        setPageState("");
-        setPageState("categories");
-        headOnClick();
-        setProdElements(category);
-    } else if (category == "trousers" || category == "shorts" || category == "shoes") {
-        setPageState("");
-        setPageState("categories");
-        bottomOnClick();
-        setProdElements(category);
-    }
-    //stupid fast bug fix folder structure
-    category2 = category + "s";
-    if (category2 == "coats" || category2 == "sweater" || category2 == "tshirts" || category2 == "gloves") {
-        setPageState("");
-        setPageState("categories");
-        upperBodyOnClick();
-        setProdElements(category);
-    } else if (category2 == "hats" || category2 == "glasses" || category2 == "earrings" || category2 == "scarfs") {
-        setPageState("");
-        setPageState("categories");
-        headOnClick();
-        setProdElements(category);
-    } else if (category2 == "trousers" || category2 == "shorts" || category2 == "shoes") {
-        setPageState("");
-        setPageState("categories");
-        bottomOnClick();
-        setProdElements(category);
+    if(prevPage != "categories") {
+        setPageState(prevPage);
+    }else{
+        // Get the source of the main product image
+        var imgSrc = document.querySelector(".prodViewImg img").src.split("/");
+        // Determine the last opened category based on the image source
+        var category = imgSrc[imgSrc.length - 2];
+        
+        document.querySelector('input[type="text"]').value = 1;
+        // Run the appropriate function for the last opened category
+        if (category == "coats" || category == "sweater" || category == "tshirts" || category == "gloves") {
+            setPageState("categories");
+            upperBodyOnClick();
+            setProdElements(category);
+        } else if (category == "hats" || category == "glasses" || category == "earrings" || category == "scarfs") {
+            setPageState("categories");
+            headOnClick();
+            setProdElements(category);
+        } else if (category == "trousers" || category == "shorts" || category == "shoes") {
+            setPageState("categories");
+            bottomOnClick();
+            setProdElements(category);
+        }
+        //stupid fast bug fix folder structure
+        category2 = category + "s";
+        if (category2 == "coats" || category2 == "sweater" || category2 == "tshirts" || category2 == "gloves") {
+            setPageState("categories");
+            upperBodyOnClick();
+            setProdElements(category);
+        } else if (category2 == "hats" || category2 == "glasses" || category2 == "earrings" || category2 == "scarfs") {
+            setPageState("categories");
+            headOnClick();
+            setProdElements(category);
+        } else if (category2 == "trousers" || category2 == "shorts" || category2 == "shoes") {
+            setPageState("categories");
+            bottomOnClick();
+            setProdElements(category);
+        }
     }
 }
 
