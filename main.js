@@ -196,11 +196,21 @@ function removeFromCart(item) {
     cartOnClick();
 }
 
+function cartProdOnClick(price, img_src, img_id){
+    var element = document.createElement('div');
+    var paragraph = document.createElement('p');
+    var img = document.createElement('img');
+    paragraph.innerHTML = price;
+    img.src = img_src;
+    img.id = img_id;
+    element.append(img, paragraph);
+    prodOnClick(element);
+}
+
 function cartOnClick() {
 
     // Load the cart view
-    setPageState("");
-    showElement("cartView");
+    setPageState("cartView");
     // Get the cart from local storage
     let cart = JSON.parse(localStorage.getItem("cart"));
     if (cart == null) {
@@ -240,7 +250,8 @@ function cartOnClick() {
         let quantity = parseInt(cart[i].quantity);
         let priceCell = document.createElement("td");
         priceCell.textContent = (quantity * price).toFixed(2) + '€';
-
+        // Make prod img clickable -> showing the prodView
+        prodImg.setAttribute("onclick", "cartProdOnClick('"+price+"','"+prodImg.src+"','"+name+"')");
         // Create a remove button cell
         let removeButtonCell = document.createElement("td");
 
@@ -493,7 +504,6 @@ function prodOnClick(clickedElement) {
     const imgElement = clickedElement.querySelector("img");
     const target_name = imgElement.id.split("_")[0];
     const price  = categoryProducts.find(e => e.category == target_name).products.find(e => e.name == imgElement.id).price;
-
     // Get the src of the clicked image
     const src = imgElement.src;
 
@@ -509,7 +519,6 @@ function prodOnClick(clickedElement) {
     if(localStorage.getItem("wishlist").includes(imgElement.id)){
         document.getElementById("wishlistbuttom").innerHTML = "Remove from wishlist";
         document.getElementById("wishlistbuttom").onclick = null;
-        console.log(imgElement.src);
         document.getElementById("wishlistbuttom").onclick = function() { removeFromWishlist2(src_cut) };
     } else {
         document.getElementById("wishlistbuttom").onclick = null;
