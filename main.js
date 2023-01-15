@@ -320,7 +320,8 @@ function wishlistOnClick() {
         //let quantity = parseInt(cart[i].quantity);
         let priceCell = document.createElement("td");
         priceCell.textContent = ( price).toFixed(2) + '€';
-
+        // Make prod img clickable -> showing the prodView
+        prodImg.setAttribute("onclick", "cartProdOnClick('"+price+"','"+prodImg.src+"','"+name+"')");
         // Create a remove button cell
         let removeButtonCell = document.createElement("td");
 
