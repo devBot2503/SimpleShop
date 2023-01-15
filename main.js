@@ -346,7 +346,12 @@ function changeProdViewAmount(amount) {
 }
 
 function paypalSim() {
-    localStorage.clear();
+    var cart = localStorage.getItem("cart");
+    if(!cart || cart.length == 0){
+        alert("Cart is empty");
+        return;
+    }
+    localStorage.removeItem("cart")
 
     document.getElementById("checkout").innerHTML = "";
     setPageState("checkout");
