@@ -245,7 +245,7 @@ function cartOnClick() {
         let tableRow = document.createElement("tr");
         // Create the product image cell
         let prodImgCell = document.createElement("td");
-        prodImgCell.classList.add("cartProdImg");
+        prodImgCell.classList.add("cartProdImg", "clickable-img");
         // Create the product image
         let prodImg = document.createElement("img");
         prodImg.src = 'graphics/' + cart[i].item;
@@ -315,7 +315,7 @@ function wishlistOnClick() {
         let tableRow = document.createElement("tr");
         // Create the product image cell
         let prodImgCell = document.createElement("td");
-        prodImgCell.classList.add("cartProdImg");
+        prodImgCell.classList.add("cartProdImg", "clickable-img");
         // Create the product image
         let prodImg = document.createElement("img");
         prodImg.src = 'graphics/' + cart[i].item;
