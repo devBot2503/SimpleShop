@@ -218,7 +218,7 @@ function makeHtmlElement(price, img_src, img_id){
     return element;
 }
 
-function cartProdOnClick(price, img_src, img_id, pageState) {
+function cartProdOnClick(price, img_src, img_id) {
     const element = makeHtmlElement(price, img_src, img_id);
     prodOnClick(element);
 }

@@ -344,8 +344,21 @@ caption{
 }
 
 
+.footer{
+    background-color: #2f2f31;
+    color: white;
+    height: 20px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
 
-
+.center{
+    text-align: center;
+}
 
 .prodList{
     position: absolute;
