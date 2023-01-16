@@ -1,4 +1,11 @@
 /*
+last Pagestage
+*/
+var lastPageState = [];
+lastPageState[0] = "categories";
+lastPageState[1] = makeHtmlElement(69.00, "./graphics/tshirt/tshirt_1.png", "tshirt_1");
+
+/*
 Product Definition
 */
 const glovesProducts = [
@@ -40,8 +47,6 @@ const categoryProducts = [
     {category: "tshirt", products: tshirtProducts}
 ];
 
-let pageState = "m|f";
-let prevPage = "";
 
 /*
 Alexander Kehr
@@ -67,9 +72,6 @@ Die Funktion setzt den Page state, also die Ansicht innerhalb des viewManagers.
 @parameter = targetId
 */
 function setPageState(targetId){
-    prevPage = pageState;
-    pageState = targetId;
-    console.log("pageState: " + pageState + "  prevPage: " + prevPage);
     const hiddenElements = ["categories", "prodView", "cartView", "checkout","wishlistView", "m|f", "coats", "sweater", "tshirts", "gloves", "hats", "glasses", "earrings", "scarfs", "trousers", "shorts", "shoes","searchList", "prodList"];
     hiddenElements.forEach(e => {
         hideElement(e);
@@ -201,6 +203,27 @@ function removeFromCart(item) {
     cartOnClick();
 }
 
+/*
+    creates an element that can be put into prodOnClick to show a product page or store an product
+*/
+function makeHtmlElement(price, img_src, img_id){
+    var element = document.createElement('div');
+    var paragraph = document.createElement('p');
+    var img = document.createElement('img');
+    paragraph.innerHTML = price;
+    img.src = img_src;
+    img.id = img_id;
+    element.append(img, paragraph);
+    return element;
+}
+
+function cartProdOnClick(price, img_src, img_id, pageState) {
+    lastPageState[0] = pageState;
+    const element = makeHtmlElement(price, img_src, img_id);
+    lastPageState[1] = element;
+    prodOnClick(element);
+}
+
 function cartOnClick() {
 
     // Load the cart view
@@ -221,8 +244,6 @@ function cartOnClick() {
     for (let i = 0; i < cart.length; i++) {
         // Create a new table row
         let tableRow = document.createElement("tr");
-        tableRow.setAttribute("class", "cartRow");
-        tableRow.setAttribute("onclick", "prodOnClick(this)");
         // Create the product image cell
         let prodImgCell = document.createElement("td");
         prodImgCell.classList.add("cartProdImg");
@@ -230,7 +251,6 @@ function cartOnClick() {
         let prodImg = document.createElement("img");
         prodImg.src = 'graphics/' + cart[i].item;
         prodImg.alt = cart[i].item;
-        prodImg.id = cart[i].item.split("/")[1].slice(0, -4);
         // Add the image to the cell
         prodImgCell.appendChild(prodImg);
         // Create the product name cell
@@ -247,7 +267,8 @@ function cartOnClick() {
         let quantity = parseInt(cart[i].quantity);
         let priceCell = document.createElement("td");
         priceCell.textContent = (quantity * price).toFixed(2) + '€';
-
+        // Make prod img clickable -> showing the prodView
+        prodImg.setAttribute("onclick", "cartProdOnClick('"+price+"','"+prodImg.src+"','"+name+"', 'cartView')");
         // Create a remove button cell
         let removeButtonCell = document.createElement("td");
 
@@ -269,10 +290,10 @@ function cartOnClick() {
     // Display the total price
     document.querySelector('.total').textContent = 'Total: ' + totalPrice.toFixed(2) + '€';
 }
-
 function wishlistOnClick() {
     // Load the cart view
-    setPageState("wishlistView");
+    setPageState("");
+    showElement("wishlistView");
     // Get the cart from local storage
     let cart = JSON.parse(localStorage.getItem("wishlist"));
     if (cart == null || cart.length == 0) {
@@ -293,8 +314,6 @@ function wishlistOnClick() {
     for (let i = 0; i < cart.length; i++) {
         // Create a new table row
         let tableRow = document.createElement("tr");
-        tableRow.setAttribute("class", "cartRow");
-        tableRow.setAttribute("onclick", "prodOnClick(this)");
         // Create the product image cell
         let prodImgCell = document.createElement("td");
         prodImgCell.classList.add("cartProdImg");
@@ -302,7 +321,6 @@ function wishlistOnClick() {
         let prodImg = document.createElement("img");
         prodImg.src = 'graphics/' + cart[i].item;
         prodImg.alt = cart[i].item;
-        prodImg.id = cart[i].item.split("/")[1].slice(0, -4);
         // Add the image to the cell
         prodImgCell.appendChild(prodImg);
         // Create the product name cell
@@ -319,7 +337,8 @@ function wishlistOnClick() {
         //let quantity = parseInt(cart[i].quantity);
         let priceCell = document.createElement("td");
         priceCell.textContent = ( price).toFixed(2) + '€';
-
+        // Make prod img clickable -> showing the prodView
+        prodImg.setAttribute("onclick", "cartProdOnClick('"+price+"','"+prodImg.src+"','"+name+"', 'wishlistView')");
         // Create a remove button cell
         let removeButtonCell = document.createElement("td");
 
@@ -415,7 +434,8 @@ function search() {
     }
 
     // Setze den Seitenzustand auf "" (leer) und zeige die prodList-Ansicht an
-    setPageState("searchList");
+    setPageState("");
+    showElement("searchList");
 
     const productsPerRow = 5;
 
@@ -505,10 +525,8 @@ function setProdElements(target_name){
 function prodOnClick(clickedElement) {
     // Get the price of the clicked element
     const imgElement = clickedElement.querySelector("img");
-    
     const target_name = imgElement.id.split("_")[0];
     const price  = categoryProducts.find(e => e.category == target_name).products.find(e => e.name == imgElement.id).price;
-
     // Get the src of the clicked image
     const src = imgElement.src;
 
@@ -619,49 +637,58 @@ function addToCart() {
 }
 
 function back() {
+    if(lastPageState[0] == "cartView"){
+        setPageState("cartView");
+        return;
+    }else if(lastPageState[0] == "wishlistView"){
+        setPageState("wishlistView");
+        return;
+    }
     let searchTerm = document.querySelector('.search').value.toLowerCase();
-    if(searchTerm != "" && prevPage == "searchList") {
+    if(searchTerm != "") {
         search();
         return;
     }
-    if(prevPage != "categories") {
-        setPageState(prevPage);
-    }else{
-        // Get the source of the main product image
-        var imgSrc = document.querySelector(".prodViewImg img").src.split("/");
-        // Determine the last opened category based on the image source
-        var category = imgSrc[imgSrc.length - 2];
-        
-        document.querySelector('input[type="text"]').value = 1;
-        // Run the appropriate function for the last opened category
-        if (category == "coats" || category == "sweater" || category == "tshirts" || category == "gloves") {
-            setPageState("categories");
-            upperBodyOnClick();
-            setProdElements(category);
-        } else if (category == "hats" || category == "glasses" || category == "earrings" || category == "scarfs") {
-            setPageState("categories");
-            headOnClick();
-            setProdElements(category);
-        } else if (category == "trousers" || category == "shorts" || category == "shoes") {
-            setPageState("categories");
-            bottomOnClick();
-            setProdElements(category);
-        }
-        //stupid fast bug fix folder structure
-        category2 = category + "s";
-        if (category2 == "coats" || category2 == "sweater" || category2 == "tshirts" || category2 == "gloves") {
-            setPageState("categories");
-            upperBodyOnClick();
-            setProdElements(category);
-        } else if (category2 == "hats" || category2 == "glasses" || category2 == "earrings" || category2 == "scarfs") {
-            setPageState("categories");
-            headOnClick();
-            setProdElements(category);
-        } else if (category2 == "trousers" || category2 == "shorts" || category2 == "shoes") {
-            setPageState("categories");
-            bottomOnClick();
-            setProdElements(category);
-        }
+    // Get the source of the main product image
+    var imgSrc = document.querySelector(".prodViewImg img").src.split("/");
+    // Determine the last opened category based on the image source
+    var category = imgSrc[imgSrc.length - 2];
+    
+    document.querySelector('input[type="text"]').value = 1;
+    // Run the appropriate function for the last opened category
+    if (category == "coats" || category == "sweater" || category == "tshirts" || category == "gloves") {
+        setPageState("");
+        setPageState("categories");
+        upperBodyOnClick();
+        setProdElements(category);
+    } else if (category == "hats" || category == "glasses" || category == "earrings" || category == "scarfs") {
+        setPageState("");
+        setPageState("categories");
+        headOnClick();
+        setProdElements(category);
+    } else if (category == "trousers" || category == "shorts" || category == "shoes") {
+        setPageState("");
+        setPageState("categories");
+        bottomOnClick();
+        setProdElements(category);
+    }
+    //stupid fast bug fix folder structure
+    category2 = category + "s";
+    if (category2 == "coats" || category2 == "sweater" || category2 == "tshirts" || category2 == "gloves") {
+        setPageState("");
+        setPageState("categories");
+        upperBodyOnClick();
+        setProdElements(category);
+    } else if (category2 == "hats" || category2 == "glasses" || category2 == "earrings" || category2 == "scarfs") {
+        setPageState("");
+        setPageState("categories");
+        headOnClick();
+        setProdElements(category);
+    } else if (category2 == "trousers" || category2 == "shorts" || category2 == "shoes") {
+        setPageState("");
+        setPageState("categories");
+        bottomOnClick();
+        setProdElements(category);
     }
 }
 
@@ -704,3 +731,4 @@ document.addEventListener("click", function(event) {
         window.speechSynthesis.speak(msg);
     }
 });
+
