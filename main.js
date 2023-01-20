@@ -3,6 +3,7 @@ last Pagestage
 */
 var currentPageState = "m|f";
 var lastPageState = "m|f";
+var size = "M"
 
 /*
 Product Definition
@@ -257,6 +258,9 @@ function cartOnClick() {
         let itemParts = cart[i].item.split('/');
         var name = itemParts[1].slice(0, -4);
         prodNameCell.textContent = name;
+        //create size cell
+        let sizeCell = document.createElement("td");
+        sizeCell.textContent = cart[i].size;
         // Create the quantity cell
         let quantityCell = document.createElement("td");
         quantityCell.textContent = cart[i].quantity;
@@ -280,7 +284,7 @@ function cartOnClick() {
         removeButtonCell.appendChild(removeButton);
 
         // Add the cells to the table row
-        [prodImgCell, prodNameCell, quantityCell, priceCell, removeButtonCell].forEach(e => {tableRow.appendChild(e)});
+        [prodImgCell, prodNameCell, sizeCell, quantityCell, priceCell, removeButtonCell].forEach(e => {tableRow.appendChild(e)});
         // Add the table row to the table body
         tableBody.appendChild(tableRow);
         // Update the total price
@@ -527,6 +531,16 @@ function prodOnClick(clickedElement) {
     const price  = categoryProducts.find(e => e.category == target_name).products.find(e => e.name == imgElement.id).price;
     // Get the src of the clicked image
     const src = imgElement.src;
+    if(!(target_name.includes("hat") || target_name.includes("earring") || target_name.includes("glasses") || target_name.includes("scarf") || target_name.includes("shoe"))){
+        showElement("size");
+        let sizeElement = document.getElementById("size");
+        let sizeButtons = sizeElement.getElementsByTagName("*");
+        for(let i = 0; i < sizeButtons.length; i++){
+            sizeButtons[i].style.backgroundColor = "#ffffff";
+        }
+    }else{
+        hideElement("size");
+    }
 
     //cut src from http://localhost:63342/SimpleShop/graphics/scarf/scarf_1.png to scarf/scarf_1.png
     const src_cut = src.split("graphics/")[1];
@@ -608,7 +622,11 @@ function addToCart() {
         // If not, create an empty cart
         let cart = [];
         // Add the item to the cart
-        cart.push({item: item, quantity: quantity, price: price});
+        if(!(item.includes("hat") || item.includes("earring") || item.includes("glasses") || item.includes("scarf") || item.includes("shoe"))){
+            cart.push({item: item, size: size, quantity: quantity, price: price});
+        }else{
+            cart.push({item: item, size: "Unisize", quantity: quantity, price: price});
+        }
         // Save the cart to local storage
         localStorage.setItem("cart", JSON.stringify(cart));
     } else {
@@ -619,13 +637,19 @@ function addToCart() {
         for (let i = 0; i < cart.length; i++) {
             if (cart[i].item == item) {
                 // If it is, update the quantity
-                cart[i].quantity += quantity;
-                itemExists = true;
+                if(cart[i].size == size){ // check if size is different
+                    cart[i].quantity += quantity;
+                    itemExists = true;
+                }
             }
         }
         // If the item is not in the cart, add it
         if (!itemExists) {
-            cart.push({item: item, quantity: quantity, price: price});
+            if(!(item.includes("hat") || item.includes("earring") || item.includes("glasses") || item.includes("scarf") || item.includes("shoe"))){
+                cart.push({item: item, size: size, quantity: quantity, price: price});
+            }else{
+                cart.push({item: item, size: "Unisize", quantity: quantity, price: price});
+            }
         }
         // Save the updated cart to local storage
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -718,6 +742,17 @@ function updateCartButton() {
     }
 }
 
+function sizeButtonOnClick(selected_size){
+    let sizeElement = document.getElementById("size");
+    let sizeButtons = sizeElement.getElementsByTagName("*");
+    for(let i = 0; i < sizeButtons.length; i++){
+        sizeButtons[i].style.backgroundColor = "#ffffff";
+    }
+    size = selected_size;
+    let btn = document.getElementById(selected_size.toLowerCase());
+    btn.style.backgroundColor = "#D3D3D3";
+}
+
 setInterval(updateCartButton, 1000);
 
 document.addEventListener("click", function(event) {
@@ -729,4 +764,3 @@ document.addEventListener("click", function(event) {
         window.speechSynthesis.speak(msg);
     }
 });
-

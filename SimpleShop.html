@@ -33,7 +33,7 @@
 
     <div class="viewManager" id="vM">
         <div class="maleFemale clickable" id="m|f"> <!--Startzustand siehe Schritt 1 von Paperprototype-->
-            <div class="male" id="m" onclick="maleOnClick()">
+            <div class="male" id="male" onclick="maleOnClick()">
                 <img src="./graphics/male.png" alt="Male" />
             </div>
             <div class="female" id="f" onclick="femaleOnClick()">
@@ -111,11 +111,18 @@
 
                             <tr>
                                 <td>
-                                    <p id="productprice" style="margin:0; padding-bottom: 75px; padding-top: 100px; font-size: 1000%; font-weight: bold;">29,99€</p>
+                                    <p id="productprice" style="margin:0; padding-bottom: 50px; padding-top: 100px; font-size: 500%; font-weight: bold; size: 100%;">29,99€</p>
                                     <div class="input-group">
                                         <button class="minus" onclick="changeProdViewAmount(-1)">-</button>
                                         <input type="text" value="1">
                                         <button class="plus" onclick="changeProdViewAmount(+1)">+</button>
+                                    </div>
+                                    <div class="size" id="size">
+                                        <button id="xs" onclick="sizeButtonOnClick('XS')">XS</button>
+                                        <button id="s" onclick="sizeButtonOnClick('S')">S</button>
+                                        <button id="m" onclick="sizeButtonOnClick('M')">M</button>
+                                        <button id="l" onclick="sizeButtonOnClick('L')">L</button>
+                                        <button id="xl" onclick="sizeButtonOnClick('XL')">XL</button>
                                     </div>
                                     <button class="warenkorb" onclick="addToCart()">
                                         <img src="graphics/cart.png" alt="add to cart">
@@ -194,6 +201,7 @@
                     <tr>
                         <th scope="col" width="40px"></th>
                         <th scope="col" width="30px">Product</th>
+                        <th scope="col" width="10px">Size</th>
                         <th scope="col" width="10px">Quantity</th>
                         <th scope="col" width="10px">Price</th>
                         <th scope="col" width="10px">Remove</th>
