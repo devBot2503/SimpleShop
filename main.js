@@ -4,6 +4,7 @@ last Pagestage
 var currentPageState = "m|f";
 var lastPageState = "m|f";
 var size = "M"
+const size_list = {"XS" : 0, "S" : 1, "M" : 2, "L" : 3, "XL" : 4}
 
 /*
 Product Definition
@@ -536,7 +537,7 @@ function prodOnClick(clickedElement) {
         let sizeElement = document.getElementById("size");
         let sizeButtons = sizeElement.getElementsByTagName("*");
         for(let i = 0; i < sizeButtons.length; i++){
-            if(i != sizeButtons.length-2){
+            if(i != size_list[size]){
                 sizeButtons[i].style.backgroundColor = "#ffffff";
             }else{
                 sizeButtons[i].style.backgroundColor = "#D3D3D3";
