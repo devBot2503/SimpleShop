@@ -11,10 +11,10 @@ Product Definition
 */
 const glovesProducts = [
     {name: "gloves_1", price: 19.99, color: "grün"},
-    {name: "gloves_2", price: 19.99, color: "orange"},
+    {name: "gloves_2", price: 19.99, color: "gelb"},
     {name: "gloves_3", price: 13.99, color: "blau"},
     {name: "gloves_4", price: 19.99, color: "orange"},
-    {name: "gloves_5", price: 19.99, color: "gelb"},
+    {name: "gloves_5", price: 19.99, color: "grün"},
     {name: "gloves_6", price: 22.99, color: "gelb"},
     {name: "gloves_7", price: 19.99, color: "blau"},
     {name: "gloves_8", price: 19.99, color: "orange"}
