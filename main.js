@@ -470,7 +470,7 @@ function search() {
         // Create a new paragraph element for the price
         let price = document.createElement("p");
         price.id = "price_" + i;
-        price.innerText = product.price + "€";
+        price.innerText = product.price.toFixed(2) + "€";
         // Add the price to the cell
         cell.appendChild(price);
         // onclick="prodOnClick(this)"
@@ -536,7 +536,11 @@ function prodOnClick(clickedElement) {
         let sizeElement = document.getElementById("size");
         let sizeButtons = sizeElement.getElementsByTagName("*");
         for(let i = 0; i < sizeButtons.length; i++){
-            sizeButtons[i].style.backgroundColor = "#ffffff";
+            if(i != sizeButtons.length-2){
+                sizeButtons[i].style.backgroundColor = "#ffffff";
+            }else{
+                sizeButtons[i].style.backgroundColor = "#D3D3D3";
+            }
         }
     }else{
         hideElement("size");
@@ -549,7 +553,7 @@ function prodOnClick(clickedElement) {
     document.querySelector(".prodViewImg img").src = src;
     document.getElementById("productprice").innerHTML = price.toFixed(2) + "€";
     //check if product is in wishlist
-    localStorage.getItem("wishlist")
+    localStorage.setItem("wishlist", localStorage.getItem("wishlist") || "[]");
     //change addToWishlist button with the function to remove from wishlist removeFromWishlist
     if(localStorage.getItem("wishlist").includes(imgElement.id)){
         document.getElementById("wishlistbuttom").innerHTML = "Remove from wishlist";
